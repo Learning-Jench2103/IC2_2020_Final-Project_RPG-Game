@@ -138,6 +138,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="KnightPlayer.cpp" />
+    <ClCompile Include="MagicianPlayer.cpp" />
+    <ClCompile Include="NovicePlayer.cpp" />
+    <ClCompile Include="OrcPlayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KnightPlayer.h" />
+    <ClInclude Include="MagicianPlayer.h" />
+    <ClInclude Include="NovicePlayer.h" />
+    <ClInclude Include="OrcPlayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
