@@ -34,16 +34,11 @@ NovicePlayer::NovicePlayer(int lv, string n)
 NovicePlayer::NovicePlayer(const NovicePlayer& a)
 {
 	name = a.name;
-	hp = a.hp;
-	mp = a.mp;
-	exp = a.exp;
-	money = a.money;
-	level = a.level;
-	attack = a.attack;
-	defense = a.defense;
-	max_hp = a.max_hp;
-	max_mp = a.max_mp;
-	lvup_exp = a.lvup_exp;
+	setLevel(a.level);
+	setHp(round((double)a.hp / a.max_hp * max_hp));
+	setMp(round((double)a.mp / a.max_mp * max_mp));
+	exp = round((double)a.exp / a.lvup_exp * lvup_exp);	// setExp() do not allow 0 as argument, so here we should assign the value directly so that a origin class whose exp is 0 can by copy, too.
+	setMoney(a.money);
 }
 
 void NovicePlayer::setName(string n)
@@ -170,3 +165,20 @@ int NovicePlayer::getLvupExp(void) const
 	return lvup_exp;
 }
 
+ostream& operator<<(ostream& output, const NovicePlayer& a)
+{
+	output << "=========== Player Information ===========" << endl;
+	output << "Player name = " << a.name << endl;
+	output << "Level = " << a.level << endl;
+	output << "Attack = " << a.attack << endl;
+	output << "Defense = " << a.defense << endl;
+	output << "max_hp = " << a.max_hp << endl;
+	output << "max_mp = " << a.max_mp << endl;
+	output << "lvup_exp = " << a.lvup_exp << endl;
+	output << "hp = " << a.hp << endl;
+	output << "mp = " << a.mp << endl;
+	output << "exp = " << a.exp << endl;
+	output << "money = " << a.money << endl;
+	output << "==========================================" << endl;
+	return output;
+}

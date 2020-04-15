@@ -19,8 +19,18 @@ KnightPlayer::KnightPlayer(int value, string n)
 }
 
 KnightPlayer::KnightPlayer(const KnightPlayer& a)
-	: NovicePlayer(a)	// the copy constructor of NovicePlayer will copy every data, so don't need to call setLevel() again
+	: NovicePlayer(a)
 {
+	setLevel(a.level);
+	attack = a.attack;
+	defense = a.defense;
+	max_hp = a.max_hp;
+	max_mp = a.max_mp;
+	lvup_exp = a.lvup_exp;
+	setHp(a.getHp());
+	setMp(a.getMp());
+	setExp(a.getExp());
+	setMoney(a.getMoney());
 }
 
 void KnightPlayer::setLevel(int value)

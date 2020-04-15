@@ -5,6 +5,7 @@
 using namespace std;
 
 class NovicePlayer {
+	friend ostream& operator<<(ostream&, const NovicePlayer&);
 private:
 	string name; // Name of the player
 	int hp;	// Current HP of the player, range: [0, max_hp]
@@ -45,11 +46,13 @@ public:
 	int getLvupExp(void) const;
 
 	/*
-	About all set-functions:
-		1.If the argument is greater than the maximum limit, set the data as the maximum limit.
+	About all constructors and set-functions:
+		1.If the argument is greater than the maximum limit of a variable, set the data as the maximum limit.
 		2.If the argument is less than the minimum limit, set the data as the minimum limit.
-		3.As long as a derived class has changed data of limit-values in this class, all the set-functions of this class will 
-			follow the new limits. So derived classes can use set-functions of this class directly.
+		3.If a argument of the copy constructor is a derived class object and its data range is different from this class, 
+			then the data will be changed in proportion.
+		4.Derived classes should check or set all values of data again after calling copy constructor of this class to make sure 
+			they are set correctly.
 	*/
 
 };
