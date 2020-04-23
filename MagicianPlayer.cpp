@@ -1,4 +1,6 @@
 #include "MagicianPlayer.h"
+#include <string>
+#include <sstream>
 
 MagicianPlayer::MagicianPlayer()
 	:NovicePlayer()
@@ -48,8 +50,114 @@ void MagicianPlayer::setLevel(int value)
 	lvup_exp = pow(10, log2(level + 1));
 }
 
-void MagicianPlayer::pray(NovicePlayer& a)	// the argument allow objects of all derived classes of NovicePlayer
+void MagicianPlayer::specialSkill(void)
 {
-	a.setMp(getMp() + level * 10);
-	a.setHp(getHp() - level * 5);
+	setMp(getMp() + level * 10);
+	setHp(getHp() - level * 5);
 }
+
+string MagicianPlayer::serialize()
+{
+	stringstream ss;
+	string result;
+	result += "@MagicianPlayer$";
+	// name //
+	result += getName();
+	result += '$';
+	// hp //
+	ss << getHp();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// mp //
+	ss << getMp();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// exp //
+	ss << getExp();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// money //
+	ss << getMoney();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// level //
+	ss << getLevel();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '#';	// end signal
+
+	return result;
+}
+
+NovicePlayer* MagicianPlayer::unserialize(string record)
+{
+	size_t begin, end;
+	stringstream ss;
+	begin = record.find('@');
+	end = record.find('$', begin);
+	// check class name //
+	if (string(record, begin + 1, end - begin - 1) != "MagicianPlayer") {
+		return nullptr;
+	}
+
+	string n;
+	int h, m, ex, mon, lev;
+	// name //
+	begin = end;
+	end = record.find('$', begin + 1);
+	n = string(record, begin + 1, end - begin - 1);
+	// hp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> h;
+	ss.str("");
+	ss.clear();
+	// mp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> m;
+	ss.str("");
+	ss.clear();
+	// exp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> ex;
+	ss.str("");
+	ss.clear();
+	// money //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> mon;
+	ss.str("");
+	ss.clear();
+	// level //
+	begin = end;
+	end = record.find('#', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> lev;
+	ss.str("");
+	ss.clear();
+
+	// construct object //
+	MagicianPlayer* a = new MagicianPlayer(lev, n);
+	a->setHp(h);
+	a->setMp(m);
+	a->setExp(ex);
+	a->setMoney(mon);
+
+	return a;
+}
+

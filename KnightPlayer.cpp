@@ -1,4 +1,6 @@
 #include "KnightPlayer.h"
+#include <string>
+#include <sstream>
 
 KnightPlayer::KnightPlayer()
 	:NovicePlayer()
@@ -48,8 +50,115 @@ void KnightPlayer::setLevel(int value)
 	lvup_exp = pow(10, log2(level + 1));
 }
 
-void KnightPlayer::heal(NovicePlayer& a)	// the argument allow objects of all derived classes of NovicePlayer
+void KnightPlayer::specialSkill(void)
 {
 	setMp(getMp() - level * 5);
-	a.setHp(a.getHp() + level * 10);
+	setHp(getHp() + level * 10);
 }
+
+string KnightPlayer::serialize()
+{
+	stringstream ss;
+	string result;
+	result += "@KnightPlayer$";
+	// name //
+	result += getName();
+	result += '$';
+	// hp //
+	ss << getHp();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// mp //
+	ss << getMp();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// exp //
+	ss << getExp();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// money //
+	ss << getMoney();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '$';
+	// level //
+	ss << getLevel();
+	result += ss.str();
+	ss.str("");
+	ss.clear();
+	result += '#';	// end signal
+
+	return result;
+
+}
+
+NovicePlayer* KnightPlayer::unserialize(string record)
+{
+	size_t begin, end;
+	stringstream ss;
+	begin = record.find('@');
+	end = record.find('$', begin);
+	// check class name //
+	if (string(record, begin + 1, end - begin - 1) != "KnightPlayer") {
+		return nullptr;
+	}
+
+	string n;
+	int h, m, ex, mon, lev;
+	// name //
+	begin = end;
+	end = record.find('$', begin + 1);
+	n = string(record, begin + 1, end - begin - 1);
+	// hp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> h;
+	ss.str("");
+	ss.clear();
+	// mp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> m;
+	ss.str("");
+	ss.clear();
+	// exp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> ex;
+	ss.str("");
+	ss.clear();
+	// money //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> mon;
+	ss.str("");
+	ss.clear();
+	// level //
+	begin = end;
+	end = record.find('#', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> lev;
+	ss.str("");
+	ss.clear();
+
+	// construct object //
+	KnightPlayer* a = new KnightPlayer(lev, n);
+	a->setHp(h);
+	a->setMp(m);
+	a->setExp(ex);
+	a->setMoney(mon);
+
+	return a;
+}
+

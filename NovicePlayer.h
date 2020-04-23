@@ -29,7 +29,7 @@ public:
 	NovicePlayer(const NovicePlayer&);
 	void setName(string);
 	string getName() const;
-	void setLevel(int);	// also calculate attack, defense, max_hp, max_mp and lvup_exp 
+	virtual void setLevel(int);	// also calculate attack, defense, max_hp, max_mp and lvup_exp 
 	int getLevel() const;
 	void setHp(int);	// should not greater than max_hp
 	int getHp() const;
@@ -45,13 +45,19 @@ public:
 	int getMaxMP(void) const;
 	int getLvupExp(void) const;
 
+	virtual void specialSkill(void);
+	virtual string serialize();
+
+	static NovicePlayer* unserialize(string record);
+
+
 	/*
 	About all constructors and set-functions:
 		1.If the argument is greater than the maximum limit of a variable, set the data as the maximum limit.
 		2.If the argument is less than the minimum limit, set the data as the minimum limit.
-		3.If a argument of the copy constructor is a derived class object and its data range is different from this class, 
+		3.If a argument of the copy constructor is a derived class object and its data range is different from this class,
 			then the data will be changed in proportion.
-		4.Derived classes should check or set all values of data again after calling copy constructor of this class to make sure 
+		4.Derived classes should check or set all values of data again after calling copy constructor of this class to make sure
 			they are set correctly.
 	*/
 
