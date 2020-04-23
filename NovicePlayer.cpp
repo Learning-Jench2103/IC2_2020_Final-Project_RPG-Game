@@ -1,5 +1,8 @@
 #include "NovicePlayer.h"
 #include <cmath>
+#include <sstream>
+#include <string>
+#include <vector>
 
 NovicePlayer::NovicePlayer()
 {
@@ -163,6 +166,92 @@ int NovicePlayer::getMaxMP(void) const
 int NovicePlayer::getLvupExp(void) const
 {
 	return lvup_exp;
+}
+
+void NovicePlayer::specialSkill(void)
+{
+
+}
+
+string NovicePlayer::serialize()
+{
+	string result;
+	stringstream ss;
+	vector<int*> from = { &hp, &mp, &exp, &money, &level };
+	result += "@NovicePlayer$";
+	result += name;
+	for (int i = 0; i < 5; i++) {
+		result += '$';
+		ss << *from[i];
+		result += ss.str();
+		ss.str("");
+		ss.clear();
+	}
+	result += '#';	// end signal
+	return result;
+}
+
+NovicePlayer* NovicePlayer::unserialize(string record)
+{
+	size_t begin, end;
+	stringstream ss;
+	begin = record.find('@');
+	end = record.find('$', begin);
+	// check class name //
+	if (string(record, begin + 1, end - begin - 1) != "NovicePlayer") {
+		return nullptr;
+	}
+
+	string n;
+	int h, m, ex, mon, lev;
+	// name //
+	begin = end;
+	end = record.find('$', begin + 1);
+	n = string(record, begin + 1, end - begin - 1);
+	// hp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> h;
+	ss.str("");
+	ss.clear();
+	// mp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> m;
+	ss.str("");
+	ss.clear();
+	// exp //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> ex;
+	ss.str("");
+	ss.clear();
+	// money //
+	begin = end;
+	end = record.find('$', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> mon;
+	ss.str("");
+	ss.clear();
+	// level //
+	begin = end;
+	end = record.find('#', begin + 1);
+	ss << string(record, begin + 1, end - begin - 1);
+	ss >> lev;
+	ss.str("");
+	ss.clear();
+
+	// construct object //
+	NovicePlayer* a= new NovicePlayer(lev, n);
+	a->setHp(h);
+	a->setMp(m);
+	a->setExp(ex);
+	a->setMoney(mon);
+
+	return a;
 }
 
 ostream& operator<<(ostream& output, const NovicePlayer& a)

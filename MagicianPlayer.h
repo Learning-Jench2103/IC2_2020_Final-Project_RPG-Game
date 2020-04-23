@@ -8,11 +8,15 @@ using namespace std;
 class MagicianPlayer : public NovicePlayer {
 public:
 	MagicianPlayer();
-	MagicianPlayer(int);
-	MagicianPlayer(int, string);
-	MagicianPlayer(const MagicianPlayer&);
-	void setLevel(int);
-	void pray(NovicePlayer& a);
+	MagicianPlayer(int value);
+	MagicianPlayer(int value, string n);
+	MagicianPlayer(const MagicianPlayer& a);
+	virtual void setLevel(int value);
+
+	virtual void specialSkill(void);
+	virtual string serialize();
+
+	static NovicePlayer* unserialize(string record);
 
 };
 
