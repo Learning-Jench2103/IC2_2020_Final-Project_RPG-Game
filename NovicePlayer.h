@@ -35,9 +35,12 @@ public:
 	int getHp() const;
 	void setMp(int);	// should not greater than max_mp
 	int getMp() const;
-	void setExp(int);	// should not greater than lvup_exp
+	void setExp(int);
+	void addExp(int);
+	void addExp(double);
 	int getExp() const;
 	void setMoney(int);
+	void addMoney(int);
 	int getMoney() const;
 	int getAttack(void) const;
 	int getDefense(void) const;
