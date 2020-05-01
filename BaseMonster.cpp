@@ -66,8 +66,8 @@ int BaseMonster::getInstanceCount(void)
 
 ostream& operator<<(ostream& output, const BaseMonster& a)
 {
-	output << "=========== Player Information ===========" << endl;
-	output << "Player name = " << a.name << endl;
+	output << "=========== Monster Information ===========" << endl;
+	output << "Monster name = " << a.name << endl;
 	output << "Attack = " << a.attack << endl;
 	output << "Defense = " << a.defense << endl;
 	output << "exp = " << a.exp << endl;

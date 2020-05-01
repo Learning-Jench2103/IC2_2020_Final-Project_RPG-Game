@@ -116,11 +116,22 @@ void NovicePlayer::setExp(int value)
 		return;
 	}
 	else if (value > lvup_exp) {
-		exp = lvup_exp;
+		setLevel(level + 1);
+		setExp(value);
 	}
 	else {
 		exp = value;
 	}
+}
+
+void explicit NovicePlayer::addExp(int a)
+{
+	setExp(getExp() + a);
+}
+
+void explicit NovicePlayer::addExp(double ratio)
+{
+	setExp(getExp() + lvup_exp * (ratio));
 }
 
 int NovicePlayer::getExp() const
@@ -136,6 +147,11 @@ void NovicePlayer::setMoney(int value)
 	else {
 		money = value;
 	}
+}
+
+void NovicePlayer::addMoney(int a)
+{
+	setMoney(getMoney() + a);
 }
 
 int NovicePlayer::getMoney() const
@@ -245,7 +261,7 @@ NovicePlayer* NovicePlayer::unserialize(string record)
 	ss.clear();
 
 	// construct object //
-	NovicePlayer* a= new NovicePlayer(lev, n);
+	NovicePlayer* a = new NovicePlayer(lev, n);
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
