@@ -138,16 +138,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseMonster.cpp" />
+    <ClCompile Include="Battle.cpp" />
+    <ClCompile Include="Field.cpp" />
+    <ClCompile Include="GoblinMonster.cpp" />
+    <ClCompile Include="JWMonster.cpp" />
     <ClCompile Include="KnightPlayer.cpp" />
     <ClCompile Include="MagicianPlayer.cpp" />
     <ClCompile Include="NovicePlayer.cpp" />
     <ClCompile Include="OrcPlayer.cpp" />
+    <ClCompile Include="ZombieMonster.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseMonster.h" />
+    <ClInclude Include="Battle.h" />
+    <ClInclude Include="Field.h" />
+    <ClInclude Include="GoblinMonster.h" />
+    <ClInclude Include="JWMonster.h" />
     <ClInclude Include="KnightPlayer.h" />
     <ClInclude Include="MagicianPlayer.h" />
     <ClInclude Include="NovicePlayer.h" />
     <ClInclude Include="OrcPlayer.h" />
+    <ClInclude Include="ZombieMonster.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

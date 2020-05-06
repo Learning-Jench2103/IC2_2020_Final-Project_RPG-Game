@@ -13,32 +13,80 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="來源檔案\Monster">
+      <UniqueIdentifier>{34ee3410-7128-4a9c-9a42-01b51656bea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Player">
+      <UniqueIdentifier>{9a2a7ed1-c5ba-4ed3-b773-2b3bf09a1aa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Player">
+      <UniqueIdentifier>{801227f5-2b91-4fa8-af48-bf5c484190b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Monster">
+      <UniqueIdentifier>{6bd0efa6-eb4a-4296-a159-99af5e3ca56b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KnightPlayer.cpp">
+    <ClCompile Include="Battle.cpp">
       <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="KnightPlayer.cpp">
+      <Filter>來源檔案\Player</Filter>
     </ClCompile>
     <ClCompile Include="MagicianPlayer.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\Player</Filter>
     </ClCompile>
     <ClCompile Include="NovicePlayer.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\Player</Filter>
     </ClCompile>
     <ClCompile Include="OrcPlayer.cpp">
+      <Filter>來源檔案\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="GoblinMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="JWMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="ZombieMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KnightPlayer.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicianPlayer.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
-    <ClInclude Include="NovicePlayer.h">
+    <ClInclude Include="Battle.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="OrcPlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="NovicePlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicianPlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="KnightPlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="GoblinMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="JWMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="ZombieMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
