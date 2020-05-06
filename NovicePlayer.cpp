@@ -8,8 +8,8 @@ NovicePlayer::NovicePlayer()
 {
 	name = "anonymous";
 	setLevel(1);
-	hp = 0;
-	mp = 0;
+	hp = max_hp;
+	mp = max_mp;
 	exp = 0;
 	money = 0;
 }
@@ -18,8 +18,8 @@ NovicePlayer::NovicePlayer(int lv)
 {
 	name = "anonymous";
 	setLevel(lv);
-	hp = 0;
-	mp = 0;
+	hp = max_hp;
+	mp = max_mp;
 	exp = 0;
 	money = 0;
 }
@@ -28,8 +28,8 @@ NovicePlayer::NovicePlayer(int lv, string n)
 {
 	name = n;
 	setLevel(lv);
-	hp = 0;
-	mp = 0;
+	hp = max_hp;
+	mp = max_mp;
 	exp = 0;
 	money = 0;
 }
@@ -124,12 +124,12 @@ void NovicePlayer::setExp(int value)
 	}
 }
 
-void explicit NovicePlayer::addExp(int a)
+void NovicePlayer::addExp(int a)
 {
 	setExp(getExp() + a);
 }
 
-void explicit NovicePlayer::addExp(double ratio)
+void NovicePlayer::addExp(double ratio)
 {
 	setExp(getExp() + lvup_exp * (ratio));
 }

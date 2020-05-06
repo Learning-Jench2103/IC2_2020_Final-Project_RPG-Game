@@ -5,8 +5,8 @@ int BaseMonster::count = 0;
 BaseMonster::BaseMonster(string n, int att, int def, int ex, int mon, int mH, int mP) :
 	name(n), attack(att), defense(def), exp(ex), money(mon), max_hp(mH), max_mp(mP)
 {
-	hp = 0;
-	mp = 0;
+	hp = max_hp;
+	mp = max_mp;
 	++count;
 }
 

@@ -77,7 +77,7 @@ private:
 	Size vision_size;	// The width and height of vision (height, width)
 	Coordinate start, dest;	// (x, y)
 	int bonusPoint = 202;
-	string player_mark = "¡´";
+	string player_mark = "¡¸";
 
 	void setUpMap(int height, int width);
 

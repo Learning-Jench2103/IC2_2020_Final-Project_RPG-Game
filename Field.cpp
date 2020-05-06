@@ -228,7 +228,7 @@ Field::Field(const string fileName, int v_width, int v_height, int curr_x, int c
 	int index_old = -1;
 	getline(file, input);
 
-	ss << string(input.begin() + input.find(','), input.end());
+	ss << string(input.begin() + input.find(',') + 1, input.end());
 	ss >> map_size.height;
 	ss.str("");
 	ss.clear();
@@ -244,18 +244,18 @@ Field::Field(const string fileName, int v_width, int v_height, int curr_x, int c
 	// read and store the maze into the program //
 	for (int y = 0; y < map_size.height; y++) {
 		string input;
-		getline(cin, input);
+		getline(file, input);
 		int begin = -1;
 		int end;
 		for (int x = 0; x < map_size.width; x++) {
 			stringstream ss;
 			int temp;
-			end = input.find(',', begin);
+			end = input.find(',', begin + 1);
 			if (end >= 0) {
-				ss << string(input, begin, end - begin - 1);
+				ss << string(input, begin + 1, end - begin - 1);
 			}
 			else {
-				ss << string(input, begin, input.length() - begin - 1);
+				ss << string(input, begin + 1, input.length() - begin - 1);
 			}
 			ss >> temp;
 			ss.str(""); ss.clear();
@@ -584,7 +584,7 @@ void Field::display(void) const
 		cout << "¢y";	// fullwidth
 		for (int column = range_begin.x; column <= range_end.x; column++) {
 			if (current_position == Coordinate(column, row)) {
-				switch (map_data[row][column].getColor()) {
+				switch (map_data[column][row].getColor()) {
 				case PAVEMENT:
 					setColor(160);
 					break;
@@ -601,12 +601,13 @@ void Field::display(void) const
 				cout << player_mark;	// fullwidth
 			}
 			else {
-				setColor(map_data[row][column].getColor());
-				cout << map_data[row][column].getMark();
+				setColor(map_data[column][row].getColor());
+				cout << map_data[column][row].getMark();
 			}
 		}
-		cout << "¢j\n";	// fullwidth
 		setColor();
+		cout << "¢j\n";	// fullwidth
+
 	}
 	setColor();
 
@@ -618,71 +619,5 @@ void Field::display(void) const
 
 	return;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-string Field::getCurrentSymbolName(void) const
-{
-	return map_data[current_position.x][current_position.y].getName();
-}
-
-Size Field::getVision(void) const
-{
-	return vision_size;
-}
-
-void Field::setMapName(string name)
-{
-	map_name = name;
-	return;
-}
-
-string Field::getMapName(void) const
-{
-	return map_name;
-}
-
-int Field::getMapSymbol(int x, int y) const
-{
-	return map_data[x][y].getSymbol();
-}
-
-string Field::getMapSymbolName(int x, int y) const
-{
-	return map_data[x][y].getName();
-}
-
-*/
-
 
 

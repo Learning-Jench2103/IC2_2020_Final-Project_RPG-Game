@@ -128,11 +128,11 @@ bool Battle::attack(Character* actor_1, Character* actor_2, bool specialSkill = 
 			p_ptr->specialSkill();
 		}
 		att = m_ptr->attack * 0.2;
-		if (att > p_ptr->getDefense() * 0.2) {
-			att -= p_ptr->getDefense() * 0.2;
+		if (att > p_ptr->getDefense() * 0.3) {
+			att -= p_ptr->getDefense() * 0.3;
 		}
-		else if (att > p_ptr->getDefense() * 0.1) {
-			att -= p_ptr->getDefense() * 0.1;
+		else if (att > p_ptr->getDefense() * 0.15) {
+			att -= p_ptr->getDefense() * 0.15;
 		}
 		else {
 			att /= 2;
@@ -149,7 +149,7 @@ bool Battle::attack(Character* actor_1, Character* actor_2, bool specialSkill = 
 		if (specialSkill) {
 			p_ptr->specialSkill();
 		}
-		att = p_ptr->getAttack() * 0.2;
+		att = p_ptr->getAttack();
 		if (att > m_ptr->defense * 0.2) {
 			att -= m_ptr->defense * 0.2;
 		}
