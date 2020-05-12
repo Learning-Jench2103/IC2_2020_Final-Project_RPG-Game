@@ -1,8 +1,17 @@
 #ifndef NOVICEPLAYER_H
 #define NOVICEPLAYER_H
 #include <iostream>
+#include <vector>
+#include <string>
+#include "Backpack.h"
 
 using namespace std;
+
+class Item;
+class WeaponItem;
+class ArmorItem;
+class ConsumableItem;
+
 
 class NovicePlayer {
 	friend ostream& operator<<(ostream&, const NovicePlayer&);
@@ -13,6 +22,11 @@ private:
 	int exp;	// Cumulative experience of the player, >= 0
 				// Will not reset to zero after leveling-up
 	int money;	// Current amount of money that player carries, >= 0
+
+	WeaponItem* weapon = NULL; // weapon item
+	ArmorItem* armor = NULL; // armor item
+
+	Backpack backpack;
 
 protected:
 	int level;	// The level of the player, >= 1
@@ -29,7 +43,7 @@ public:
 	NovicePlayer(const NovicePlayer&);
 	void setName(string);
 	string getName() const;
-	virtual void setLevel(int);	// also calculate attack, defense, max_hp, max_mp and lvup_exp 
+	virtual void setLevel(int);	// also calculate attack, defense, max_hp, max_mp and lvup_exp
 	int getLevel() const;
 	void setHp(int);	// should not greater than max_hp
 	int getHp() const;
@@ -42,17 +56,29 @@ public:
 	void setMoney(int);
 	void addMoney(int);
 	int getMoney() const;
+	void setAttack(int);
 	int getAttack(void) const;
+	void setDefense(int);
 	int getDefense(void) const;
 	int getMaxHP(void) const;
 	int getMaxMP(void) const;
 	int getLvupExp(void) const;
 
 	virtual void specialSkill(void);
+
+	bool equipWeapon(WeaponItem* weapon);
+	bool equipArmor(ArmorItem* armor);
+	void useConsumable(ConsumableItem* consumable);
+
+	/* backpack */
+	int getCurrentBackpackWeight(void) const;
+	int getBackpackWeightLimit(void) const;
+	vector<string> showBackpack(void) const;
+	vector<string> showItemInfo(int index) const;
+	int getItemAmount(void) const;
+
 	virtual string serialize();
-
 	static NovicePlayer* unserialize(string record);
-
 
 	/*
 	About all constructors and set-functions:

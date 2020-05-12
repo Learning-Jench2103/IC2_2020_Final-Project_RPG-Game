@@ -533,6 +533,16 @@ bool Field::setGrid(int x, int y, int sym, string n, string m, int color)
 	return true;
 }
 
+void Field::setPlayerMark(string mark)
+{
+	player_mark = mark;
+}
+
+string Field::getPlayerMark() const
+{
+	return player_mark;
+}
+
 bool Field::availableGrid(int x, int y)
 {
 	if (x >= map_size.width || y >= map_size.height || x < 0 || y < 0) {

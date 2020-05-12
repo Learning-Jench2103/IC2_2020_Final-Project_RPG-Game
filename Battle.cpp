@@ -1,4 +1,6 @@
 #include "Battle.h"
+#include "NovicePlayer.h"
+#include "BaseMonster.h"
 
 inline void Battle::reward()
 {

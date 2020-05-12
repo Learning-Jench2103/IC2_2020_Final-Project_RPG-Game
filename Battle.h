@@ -2,9 +2,10 @@
 #define BATTLE_H
 #include <iostream>
 #include <vector>
-#include "NovicePlayer.h"
-#include "BaseMonster.h"
 using namespace std;
+
+class NovicePlayer;
+class BaseMonster;
 
 struct Character {
 	char type; // monster or player?

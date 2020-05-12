@@ -25,6 +25,9 @@
     <Filter Include="標頭檔\Monster">
       <UniqueIdentifier>{6bd0efa6-eb4a-4296-a159-99af5e3ca56b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Item_base">
+      <UniqueIdentifier>{ff07e9bc-ea35-4fd4-b4fc-edbef292a35a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Battle.cpp">
@@ -57,6 +60,9 @@
     <ClCompile Include="Field.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Backpack.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h">
@@ -87,6 +93,21 @@
       <Filter>標頭檔\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Field.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponItem.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorItem.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsumableItem.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="Backpack.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,9 @@
 #include "NovicePlayer.h"
+#include "Item.h"
+#include "WeaponItem.h"
+#include "ArmorItem.h"
+#include "ConsumableItem.h"
+#include "Backpack.h"
 #include <cmath>
 #include <sstream>
 #include <string>
@@ -67,6 +72,7 @@ void NovicePlayer::setLevel(int value)
 	max_hp = 100 + 10 * level;
 	max_mp = 40 + 5 * level;
 	lvup_exp = pow(10, log2(level + 1));
+	backpack.setWeightLimit(70 + 30 * level);
 }
 
 int NovicePlayer::getLevel() const
@@ -159,9 +165,19 @@ int NovicePlayer::getMoney() const
 	return money;
 }
 
+void NovicePlayer::setAttack(int attack)
+{
+	NovicePlayer::attack = attack;
+}
+
 int NovicePlayer::getAttack(void) const
 {
 	return attack;
+}
+
+void NovicePlayer::setDefense(int defense)
+{
+	NovicePlayer::defense = defense;
 }
 
 int NovicePlayer::getDefense(void) const
@@ -187,6 +203,62 @@ int NovicePlayer::getLvupExp(void) const
 void NovicePlayer::specialSkill(void)
 {
 
+}
+
+bool NovicePlayer::equipWeapon(WeaponItem* weapon)
+{
+	if (armor != nullptr && armor->need_hands + weapon->need_hands > 2) {
+		return false;
+	}
+	if (NovicePlayer::weapon != nullptr) {
+		setAttack(getAttack() - weapon->attack_increment);
+		backpack.putItem(NovicePlayer::weapon);
+	}
+	NovicePlayer::weapon = weapon;
+	return true;
+}
+
+bool NovicePlayer::equipArmor(ArmorItem* armor)
+{
+	if (weapon != nullptr && armor->need_hands + weapon->need_hands > 2) {
+		return false;
+	}
+	if (NovicePlayer::armor != nullptr) {
+		setDefense(getDefense() - armor->defense_increment);
+		backpack.putItem(NovicePlayer::armor);
+	}
+	NovicePlayer::armor = armor;
+	return true;
+}
+
+void NovicePlayer::useConsumable(ConsumableItem* consumable)
+{
+	consumable->use(this);
+}
+
+int NovicePlayer::getCurrentBackpackWeight(void) const
+{
+	return backpack.getCurrentBackpackWeight();
+}
+
+int NovicePlayer::getBackpackWeightLimit(void) const
+{
+	return backpack.getBackpackWeightLimit();
+}
+
+vector<string> NovicePlayer::showBackpack(void) const
+{
+	return backpack.showBackpack();
+}
+
+vector<string> NovicePlayer::showItemInfo(int index) const
+{
+	return backpack.showItemInfo(index);
+}
+
+int NovicePlayer::getItemAmount(void) const
+{
+	return backpack.getItemAmount();
 }
 
 string NovicePlayer::serialize()
