@@ -28,6 +28,12 @@
     <Filter Include="標頭檔\Item_base">
       <UniqueIdentifier>{ff07e9bc-ea35-4fd4-b4fc-edbef292a35a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="標頭檔\Items">
+      <UniqueIdentifier>{aafda6bc-9951-49f5-b679-86c86c88dad2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="來源檔案\Items">
+      <UniqueIdentifier>{170818a3-c1dd-4bfa-b1e6-6feeed8fbdce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Battle.cpp">
@@ -61,6 +67,24 @@
       <Filter>來源檔案</Filter>
     </ClCompile>
     <ClCompile Include="Backpack.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon_SkywardSword.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon_DragonKillFalchion.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor_Armour.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor_GoldenShield.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Consumable_LifePotion.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Consumable_MagicPotion.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
@@ -108,6 +132,24 @@
       <Filter>標頭檔\Item_base</Filter>
     </ClInclude>
     <ClInclude Include="Backpack.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon_SkywardSword.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon_DragonKillFalchion.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor_Armour.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor_GoldenShield.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumable_LifePotion.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Consumable_MagicPotion.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
