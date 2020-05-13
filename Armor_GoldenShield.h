@@ -3,6 +3,7 @@
 #include "ArmorItem.h"
 class GoldenShield : public ArmorItem
 {
+public:
 	GoldenShield();
 
 	/*

@@ -5,6 +5,7 @@
 
 class DragonKillFalchion : public WeaponItem
 {
+public:
 	DragonKillFalchion();
 
 	/*

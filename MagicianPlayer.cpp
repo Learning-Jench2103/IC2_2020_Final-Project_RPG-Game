@@ -52,8 +52,11 @@ void MagicianPlayer::setLevel(int value)
 
 void MagicianPlayer::specialSkill(void)
 {
-	setMp(getMp() + level * 10);
-	setHp(getHp() - level * 5);
+	if (getHp() < 15) {
+		return;
+	}
+	setMp(getMp() + 10);
+	setHp(getHp() - 15);
 }
 
 string MagicianPlayer::serialize()

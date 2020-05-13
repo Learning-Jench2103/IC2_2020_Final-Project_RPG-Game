@@ -6,6 +6,7 @@ class NovicePlayer;
 
 class MagicPotion : public ConsumableItem
 {
+public:
 	MagicPotion();
 	virtual void use(NovicePlayer*);
 };

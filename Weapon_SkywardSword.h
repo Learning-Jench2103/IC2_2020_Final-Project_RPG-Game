@@ -4,6 +4,7 @@
 #include "WeaponItem.h"
 
 class SkywardSword :public WeaponItem {
+public:
 	SkywardSword();
 
 	/*

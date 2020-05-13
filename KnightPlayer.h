@@ -2,6 +2,7 @@
 #define KNIGHTPLAYER_H
 
 #include <iostream>
+#include <String>
 #include "NovicePlayer.h"
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
 	virtual void setLevel(int value);
 
 	virtual void specialSkill(void);
+	const string specialSkill_description = "可提升15點血量，但會扣除10點魔力";
 	virtual string serialize();
 
 	static NovicePlayer* unserialize(string record);

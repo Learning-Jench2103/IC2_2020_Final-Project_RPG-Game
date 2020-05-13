@@ -49,6 +49,16 @@ NovicePlayer::NovicePlayer(const NovicePlayer& a)
 	setMoney(a.money);
 }
 
+NovicePlayer::~NovicePlayer()
+{
+	if (weapon != nullptr) {
+		delete weapon;
+	}
+	if (armor != nullptr) {
+		delete armor;
+	}
+}
+
 void NovicePlayer::setName(string n)
 {
 	name = n;
@@ -211,10 +221,11 @@ bool NovicePlayer::equipWeapon(WeaponItem* weapon)
 		return false;
 	}
 	if (NovicePlayer::weapon != nullptr) {
-		setAttack(getAttack() - weapon->attack_increment);
+		setAttack(getAttack() - NovicePlayer::weapon->attack_increment);
 		backpack.putItem(NovicePlayer::weapon);
 	}
 	NovicePlayer::weapon = weapon;
+	setAttack(getAttack() + weapon->attack_increment);
 	return true;
 }
 
@@ -224,10 +235,11 @@ bool NovicePlayer::equipArmor(ArmorItem* armor)
 		return false;
 	}
 	if (NovicePlayer::armor != nullptr) {
-		setDefense(getDefense() - armor->defense_increment);
+		setDefense(getDefense() - NovicePlayer::armor->defense_increment);
 		backpack.putItem(NovicePlayer::armor);
 	}
 	NovicePlayer::armor = armor;
+	setDefense(getDefense() + armor->defense_increment);
 	return true;
 }
 
@@ -259,6 +271,16 @@ vector<string> NovicePlayer::showItemInfo(int index) const
 int NovicePlayer::getItemAmount(void) const
 {
 	return backpack.getItemAmount();
+}
+
+Item* NovicePlayer::getItemPtr(int index)
+{
+	return backpack.takeItem(index);
+}
+
+bool NovicePlayer::putItem(Item* item)
+{
+	return backpack.putItem(item);
 }
 
 string NovicePlayer::serialize()

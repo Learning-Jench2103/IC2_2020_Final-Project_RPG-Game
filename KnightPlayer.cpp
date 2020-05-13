@@ -52,8 +52,11 @@ void KnightPlayer::setLevel(int value)
 
 void KnightPlayer::specialSkill(void)
 {
-	setMp(getMp() - level * 5);
-	setHp(getHp() + level * 10);
+	if (getMp() < 10) {
+		return;
+	}
+	setMp(getMp() - 10);
+	setHp(getHp() + 15);
 }
 
 string KnightPlayer::serialize()

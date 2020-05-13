@@ -78,14 +78,14 @@
     <ClCompile Include="Armor_Armour.cpp">
       <Filter>來源檔案\Items</Filter>
     </ClCompile>
-    <ClCompile Include="Armor_GoldenShield.cpp">
-      <Filter>來源檔案\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Consumable_LifePotion.cpp">
       <Filter>來源檔案\Items</Filter>
     </ClCompile>
     <ClCompile Include="Consumable_MagicPotion.cpp">
-      <Filter>來源檔案</Filter>
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor_GoldenShield.cpp">
+      <Filter>來源檔案\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,14 +143,14 @@
     <ClInclude Include="Armor_Armour.h">
       <Filter>標頭檔\Items</Filter>
     </ClInclude>
-    <ClInclude Include="Armor_GoldenShield.h">
-      <Filter>標頭檔\Items</Filter>
-    </ClInclude>
     <ClInclude Include="Consumable_LifePotion.h">
       <Filter>標頭檔\Items</Filter>
     </ClInclude>
     <ClInclude Include="Consumable_MagicPotion.h">
-      <Filter>標頭檔</Filter>
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor_GoldenShield.h">
+      <Filter>標頭檔\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

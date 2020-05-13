@@ -41,6 +41,7 @@ public:
 	NovicePlayer(int);	//Initializes level of the player, name = ¡§anonymous¡¨
 	NovicePlayer(int, string);	//Initializes leveland name of the player
 	NovicePlayer(const NovicePlayer&);
+	~NovicePlayer();
 	void setName(string);
 	string getName() const;
 	virtual void setLevel(int);	// also calculate attack, defense, max_hp, max_mp and lvup_exp
@@ -76,6 +77,8 @@ public:
 	vector<string> showBackpack(void) const;
 	vector<string> showItemInfo(int index) const;
 	int getItemAmount(void) const;
+	Item* getItemPtr(int index);
+	bool putItem(Item* item);
 
 	virtual string serialize();
 	static NovicePlayer* unserialize(string record);

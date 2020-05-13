@@ -7,6 +7,7 @@ class NovicePlayer;
 
 class LifePotion : public ConsumableItem
 {
+public:
 	LifePotion();
 	virtual void use(NovicePlayer* player);
 

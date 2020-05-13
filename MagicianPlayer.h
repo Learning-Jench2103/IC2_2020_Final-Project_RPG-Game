@@ -14,6 +14,7 @@ public:
 	virtual void setLevel(int value);
 
 	virtual void specialSkill(void);
+	const string specialSkill_description = "可提升10點魔力，但會扣除15點血量";
 	virtual string serialize();
 
 	static NovicePlayer* unserialize(string record);

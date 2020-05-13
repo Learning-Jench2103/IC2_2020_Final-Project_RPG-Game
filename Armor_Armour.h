@@ -4,6 +4,7 @@
 
 class Armour : public ArmorItem
 {
+public:
 	Armour();
 
 	/*
