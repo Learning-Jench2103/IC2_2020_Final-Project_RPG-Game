@@ -36,121 +36,127 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Battle.cpp">
+    <ClCompile Include="Players\MagicianPlayer.cpp">
+      <Filter>來源檔案\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\NovicePlayer.cpp">
+      <Filter>來源檔案\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\OrcPlayer.cpp">
+      <Filter>來源檔案\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Players\\KnightPlayer.cpp">
+      <Filter>來源檔案\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Armor_Armour.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Armor_GoldenShield.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Consumable_LifePotion.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Consumable_MagicPotion.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Weapon_DragonKillFalchion.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Weapon_SkywardSword.cpp">
+      <Filter>來源檔案\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Monsters\BaseMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monsters\GoblinMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monsters\JWMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monsters\ZombieMonster.cpp">
+      <Filter>來源檔案\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\Backpack.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="KnightPlayer.cpp">
-      <Filter>來源檔案\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicianPlayer.cpp">
-      <Filter>來源檔案\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="NovicePlayer.cpp">
-      <Filter>來源檔案\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="OrcPlayer.cpp">
-      <Filter>來源檔案\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseMonster.cpp">
-      <Filter>來源檔案\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="GoblinMonster.cpp">
-      <Filter>來源檔案\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="JWMonster.cpp">
-      <Filter>來源檔案\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="ZombieMonster.cpp">
-      <Filter>來源檔案\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="Field.cpp">
+    <ClCompile Include="Others\Battle.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="Backpack.cpp">
+    <ClCompile Include="Others\Field.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon_SkywardSword.cpp">
-      <Filter>來源檔案\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon_DragonKillFalchion.cpp">
-      <Filter>來源檔案\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Armor_Armour.cpp">
-      <Filter>來源檔案\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Consumable_LifePotion.cpp">
-      <Filter>來源檔案\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Consumable_MagicPotion.cpp">
-      <Filter>來源檔案\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Armor_GoldenShield.cpp">
-      <Filter>來源檔案\Items</Filter>
+    <ClCompile Include="Others\Menu.cpp">
+      <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Battle.h">
+    <ClInclude Include="Players\KnightPlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\MagicianPlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\NovicePlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Players\OrcPlayer.h">
+      <Filter>標頭檔\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Armor_Armour.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Armor_GoldenShield.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Consumable_LifePotion.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Consumable_MagicPotion.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Weapon_DragonKillFalchion.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Weapon_SkywardSword.h">
+      <Filter>標頭檔\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\base\ArmorItem.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\base\ConsumableItem.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\base\Item.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\base\WeaponItem.h">
+      <Filter>標頭檔\Item_base</Filter>
+    </ClInclude>
+    <ClInclude Include="Monsters\BaseMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monsters\GoblinMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monsters\JWMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monsters\ZombieMonster.h">
+      <Filter>標頭檔\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\Backpack.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="OrcPlayer.h">
-      <Filter>標頭檔\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="NovicePlayer.h">
-      <Filter>標頭檔\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicianPlayer.h">
-      <Filter>標頭檔\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="KnightPlayer.h">
-      <Filter>標頭檔\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseMonster.h">
-      <Filter>標頭檔\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="GoblinMonster.h">
-      <Filter>標頭檔\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="JWMonster.h">
-      <Filter>標頭檔\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="ZombieMonster.h">
-      <Filter>標頭檔\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="Field.h">
+    <ClInclude Include="Others\Battle.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>標頭檔\Item_base</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponItem.h">
-      <Filter>標頭檔\Item_base</Filter>
-    </ClInclude>
-    <ClInclude Include="ArmorItem.h">
-      <Filter>標頭檔\Item_base</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsumableItem.h">
-      <Filter>標頭檔\Item_base</Filter>
-    </ClInclude>
-    <ClInclude Include="Backpack.h">
+    <ClInclude Include="Others\Field.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon_SkywardSword.h">
-      <Filter>標頭檔\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon_DragonKillFalchion.h">
-      <Filter>標頭檔\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Armor_Armour.h">
-      <Filter>標頭檔\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Consumable_LifePotion.h">
-      <Filter>標頭檔\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Consumable_MagicPotion.h">
-      <Filter>標頭檔\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Armor_GoldenShield.h">
-      <Filter>標頭檔\Items</Filter>
+    <ClInclude Include="Others\Menu.h">
+      <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
