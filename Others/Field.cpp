@@ -1,12 +1,5 @@
 #include "Field.h"
-
-enum { PAVEMENT = 0, WALL = 1, STARTPOINT = 200, DESTPOINT = 201 };
-
-void setColor(unsigned int color = 7) {
-	HANDLE hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole, color);
-}
+#include <Windows.h>
 
 Coordinate::Coordinate()
 {
@@ -49,6 +42,9 @@ bool Coordinate::operator<(const Coordinate& other) const
 	if (x > other.x) {
 		return false;
 	}
+	else {
+		return false;
+	}
 }
 
 Size::Size()
@@ -70,108 +66,19 @@ Size& Size::operator=(const Size& other)
 	return *this;
 }
 
-Grid::Grid()
+void Grid::operator=(const Grid& other)
 {
+	symbol = other.symbol;
+	name = other.name;
+	mark = other.mark;
+	player_mark = other.player_mark;
+	explanation = other.explanation;
+	color = other.color;
+	functionPtrType = other.functionPtrType;
+	function = other.function;
 }
 
-Grid::Grid(int symbol)
-{
-	Grid::symbol = symbol;
-}
 
-Grid::Grid(int symbol, string name, string mark, int color)
-{
-	Grid::symbol = symbol;
-	Grid::name = name;
-	Grid::mark = mark;
-	Grid::color = color;
-}
-
-Grid::Grid(int symbol, string name, string mark, string explanation, int color)
-{
-	Grid::symbol = symbol;
-	Grid::name = name;
-	Grid::mark = mark;
-	Grid::explanation = explanation;
-	Grid::color = color;
-}
-
-void Grid::setSymbol(int symbol)
-{
-	Grid::symbol = symbol;
-}
-
-int Grid::getSymbol() const
-{
-	return symbol;
-}
-
-void Grid::setName(string name)
-{
-	Grid::name = name;
-}
-
-string Grid::getName() const
-{
-	return name;
-}
-
-bool Grid::setMark(string mark)
-{
-	if (mark.length() != 2) {
-		return false;
-	}
-	Grid::mark = mark;
-	return true;
-}
-
-string Grid::getMark() const
-{
-	return mark;
-}
-
-void Grid::setExplain(string explanation)
-{
-	Grid::explanation = explanation;
-}
-
-string Grid::getExplain() const
-{
-	return explanation;
-}
-
-void Grid::setColor(unsigned int color)
-{
-	Grid::color = color;
-}
-
-unsigned int Grid::getColor() const
-{
-	return color;
-}
-
-void Grid::setFunction(string type, void* ptr)
-{
-	functionPtrType = type;
-	function = ptr;
-}
-
-string Grid::getFunctionType() const
-{
-	return functionPtrType;
-}
-
-void* Grid::getFunction() const
-{
-	return function;
-}
-
-void Grid::setGrid(int symbol, string name, unsigned int color)
-{
-	Grid::symbol = symbol;
-	Grid::name = name;
-	Grid::color = color;
-}
 
 void Grid::setGrid(int symbol, string name, string mark, unsigned int color)
 {
@@ -181,20 +88,11 @@ void Grid::setGrid(int symbol, string name, string mark, unsigned int color)
 	Grid::color = color;
 }
 
-bool Grid::availableGrid()
+void Grid::setInfo(string mark, unsigned int color, string explanation)
 {
-	return symbol == 0;
-}
-
-void Grid::operator=(const Grid& other)
-{
-	symbol = other.symbol;
-	name = other.name;
-	mark = other.mark;
-	explanation = other.explanation;
-	color = other.color;
-	functionPtrType = other.functionPtrType;
-	function = other.function;
+	Grid::mark = mark;
+	Grid::color = color;
+	Grid::explanation = explanation;
 }
 
 void Field::setUpMap(int height, int width)
@@ -229,17 +127,16 @@ Field::Field(const string fileName, int v_width, int v_height, int curr_x, int c
 	getline(file, input);
 
 	ss << string(input.begin() + input.find(',') + 1, input.end());
-	ss >> map_size.height;
-	ss.str("");
-	ss.clear();
-
-	ss << string(input, 0, input.find(','));
 	ss >> map_size.width;
 	ss.str("");
 	ss.clear();
 
+	ss << string(input, 0, input.find(','));
+	ss >> map_size.height;
+	ss.str("");
+	ss.clear();
+
 	setUpMap(map_size.height, map_size.width);
-	setVisionSize(v_height, v_width);
 
 	// read and store the maze into the program //
 	for (int y = 0; y < map_size.height; y++) {
@@ -259,6 +156,7 @@ Field::Field(const string fileName, int v_width, int v_height, int curr_x, int c
 			}
 			ss >> temp;
 			ss.str(""); ss.clear();
+			/*
 			switch (temp) {
 			case 0:
 				map_data[x][y].setGrid(0, "Pavement", "■", 250);
@@ -278,50 +176,63 @@ Field::Field(const string fileName, int v_width, int v_height, int curr_x, int c
 				map_data[x][y].setSymbol(temp);
 			}
 			map_data[x][y].setSymbol(temp);
+			*/
+			if (temp == 0) {
+				map_data[x][y].setGrid(0, "Pavement", "■", 250);
+
+			}
+			else if (temp == 1) {
+				map_data[x][y].setGrid(1, "Wall", "■", 240);
+			}
+			else if (temp % 100 == 0) {
+				map_data[x][y].setGrid(temp, "Start", "■", 252);
+				start = Coordinate(x, y);
+			}
+			else if (temp % 100 == 1) {
+				map_data[x][y].setGrid(temp, "Destination", "■", 249);
+				dest = Coordinate(x, y);
+			}
+			else {
+				map_data[x][y].symbol = temp;
+			}
 			begin = end;
 		}
 	}
 
 	file.close();
 	if (curr_x >= 0 && curr_y >= 0) {
-		setPosition(curr_x, curr_y);
-	}
-	else {
-		setPosition(start.x, start.y);
-	}
-}
-
-Field::Field(vector<vector<Grid>> map, string name, int v_width, int v_height, int curr_x, int curr_y)
-{
-	map_name = name;
-	map_data = map;
-	map_size = Size(v_height, v_width);
-	for (int x = 0; x < map_size.width; x++) {
-		for (int y = 0; y < map_size.height; y++) {
-			if (map_data.at(x).at(y).getSymbol() == 200) {
-				start = Coordinate(x, y);
-			}
-			if (map_data.at(x).at(y).getSymbol() == 201) {
-				dest = Coordinate(x, y);
-			}
-			if (map_data.at(x).at(y).getSymbol() >= bonusPoint) {
-				bonusPoint = map_data.at(x).at(y).getSymbol() + 1;
-			}
-		}
-	}
-	if (curr_x >= 0 && curr_y >= 0) {
-		current_position = Coordinate(curr_x, curr_y);
+		current_position.x = curr_x;
+		current_position.y = curr_y;
 	}
 	else {
 		current_position = start;
 	}
 }
 
+void Field::setGrid(int symbol, string name, string mark, unsigned int color, string explanation)
+{
+	for (int x = 0; x < map_data.size(); x++) {
+		for (int y = 0; y < map_data.at(x).size(); y++) {
+			if (map_data.at(x).at(y).symbol == symbol) {
+				map_data.at(x).at(y).name = name;
+				map_data.at(x).at(y).mark = mark;
+				map_data.at(x).at(y).color = color;
+				map_data.at(x).at(y).explanation = explanation;
+			}
+		}
+	}
+}
+
+void Field::setGrid(Coordinate position, string mark)
+{
+	map_data.at(position.x).at(position.y).mark = mark;
+}
+
 bool Field::move(char key)
 {
 	switch (key) {
 	case 'w':
-		if (map_data[current_position.x][current_position.y - 1].getSymbol() == WALL) {
+		if (map_data[current_position.x][current_position.y - 1].symbol == 1) {
 			return false;
 		}
 		else {
@@ -329,7 +240,7 @@ bool Field::move(char key)
 		}
 		break;
 	case 'a':
-		if (map_data[current_position.x - 1][current_position.y].getSymbol() == WALL) {
+		if (map_data[current_position.x - 1][current_position.y].symbol == 1) {
 			return false;
 		}
 		else {
@@ -337,7 +248,7 @@ bool Field::move(char key)
 		}
 		break;
 	case 's':
-		if (map_data[current_position.x][current_position.y + 1].getSymbol() == WALL) {
+		if (map_data[current_position.x][current_position.y + 1].symbol == 1) {
 			return false;
 		}
 		else {
@@ -345,7 +256,7 @@ bool Field::move(char key)
 		}
 		break;
 	case 'd':
-		if (map_data[current_position.x + 1][current_position.y].getSymbol() == WALL) {
+		if (map_data[current_position.x + 1][current_position.y].symbol == 1) {
 			return false;
 		}
 		else {
@@ -376,17 +287,12 @@ bool Field::moveRight(void)
 	return move('d');
 }
 
-bool Field::setPosition(int x, int y)
+void Field::setPosition(int x, int y)
 {
-	if (x < 0 || x >= map_size.width || y < 0 || y >= map_size.height) {
-		return false;
+	if (map_data.at(x).at(y).symbol != 1) {
+		current_position.x = x;
+		current_position.y = y;
 	}
-	if (map_data[x][y].getSymbol() == WALL) {
-		return false;
-	}
-	current_position.x = x;
-	current_position.y = y;
-	return true;
 }
 
 Coordinate Field::getCurrentPosition(void) const
@@ -394,19 +300,9 @@ Coordinate Field::getCurrentPosition(void) const
 	return current_position;
 }
 
-void Field::setMapName(string name)
+Size Field::getMapSize(void) const
 {
-	map_name = name;
-}
-
-string Field::getMapName(void) const
-{
-	return map_name;
-}
-
-void Field::setVisionSize(int w, int h)
-{
-	vision_size = Size(h, w);
+	return map_size;
 }
 
 Size Field::getVisionSize(void) const
@@ -414,141 +310,62 @@ Size Field::getVisionSize(void) const
 	return vision_size;
 }
 
-Coordinate Field::getStartPosition() const
-{
-	return start;
-}
-
-Coordinate Field::getDestinationPosition() const
-{
-	return dest;
-}
-
-void Field::setSymbol(int symbol)
-{
-	map_data[current_position.x][current_position.y].setSymbol(symbol);
-}
-
-void Field::setSymbol(int symbol, int x, int y)
-{
-	map_data[x][y].setSymbol(symbol);
-}
-
 int Field::getSymbol() const
 {
-	return map_data[current_position.x][current_position.y].getSymbol();
+	return map_data.at(current_position.x).at(current_position.y).symbol;
 }
 
 int Field::getSymbol(int x, int y) const
 {
-	return map_data[x][y].getSymbol();
+	return map_data.at(x).at(y).symbol;
 }
 
-void Field::setSymbolName(string name)
+vector<Coordinate> Field::getSymbolCoordinates(int symbol) const
 {
-	map_data[current_position.x][current_position.y].setName(name);
-}
-
-void Field::setSymbolName(string name, int x, int y)
-{
-	map_data[x][y].setName(name);
+	vector<Coordinate> result;
+	for (int x = 0; x < map_data.size(); x++) {
+		for (int y = 0; y < map_data.at(x).size(); y++) {
+			if (map_data.at(x).at(y).symbol == symbol) {
+				result.push_back(Coordinate(x, y));
+			}
+		}
+	}
+	return result;
 }
 
 string Field::getSymbolName(void) const
 {
-	return map_data[current_position.x][current_position.y].getName();
+	return map_data.at(current_position.x).at(current_position.y).name;
 }
 
 string Field::getSymbolName(int x, int y) const
 {
-	return map_data[x][y].getName();
-}
-
-void Field::setSymbolMark(string mark)
-{
-	map_data[current_position.x][current_position.y].setMark(mark);
-}
-
-void Field::setSymbolMark(string mark, int x, int y)
-{
-	map_data[x][y].setMark(mark);
-}
-
-void Field::setSymbolExplanation(string explanation)
-{
-	map_data[current_position.x][current_position.y].setExplain(explanation);
-}
-
-void Field::setSymbolExplanation(string explanation, int x, int y)
-{
-	map_data[x][y].setExplain(explanation);
+	return map_data.at(x).at(y).name;
 }
 
 string Field::getSymbolExplanation() const
 {
-	return map_data[current_position.x][current_position.y].getExplain();
+	return map_data.at(current_position.x).at(current_position.y).explanation;
 }
 
 string Field::getSymbolExplanation(int x, int y) const
 {
-	return map_data[x][y].getExplain();
-}
-
-void Field::setSymbolColor(unsigned int color)
-{
-	map_data[current_position.x][current_position.y].setColor(color);
-}
-
-void Field::setSymbolColor(unsigned int color, int x, int y)
-{
-	map_data[x][y].setColor(color);
-}
-
-bool Field::setGrid(int x, int y, int sym, string n, int color)
-{
-	if (x < 0 || y < 0) {
-		return false;
-	}
-	if (x >= map_size.width || y >= map_size.height) {
-		return false;
-	}
-	map_data[x][y].setSymbol(sym);
-	map_data[x][y].setName(n);
-	map_data[x][y].setColor(color);
-	return true;
-}
-
-bool Field::setGrid(int x, int y, int sym, string n, string m, int color)
-{
-	if (x < 0 || y < 0) {
-		return false;
-	}
-	if (x >= map_size.width || y >= map_size.height) {
-		return false;
-	}
-	map_data[x][y].setSymbol(sym);
-	map_data[x][y].setName(n);
-	map_data[x][y].setMark(m);
-	map_data[x][y].setColor(color);
-	return true;
-}
-
-void Field::setPlayerMark(string mark)
-{
-	player_mark = mark;
+	return map_data.at(x).at(y).explanation;
 }
 
 string Field::getPlayerMark() const
 {
-	return player_mark;
+	return map_data.at(current_position.x).at(current_position.y).player_mark;
 }
 
-bool Field::availableGrid(int x, int y)
+bool Field::isStepped() const
 {
-	if (x >= map_size.width || y >= map_size.height || x < 0 || y < 0) {
-		return false;
-	}
-	return map_data[x][y].getSymbol() != WALL;
+	return map_data.at(current_position.x).at(current_position.y).stepped;
+}
+
+void Field::step()
+{
+	map_data.at(current_position.x).at(current_position.y).stepped = true;
 }
 
 void Field::display(void) const
@@ -584,7 +401,10 @@ void Field::display(void) const
 	}
 
 	// print map //
-	cout << "  ";
+	setCursor(4, 1);
+	cout << map_name;
+	setCursor(2, 3);
+	//cout << "  ";
 	for (int column = 0; column < vision_size.width; column++) {
 		cout << "▁";	// fullwidth
 	}
@@ -594,40 +414,48 @@ void Field::display(void) const
 		cout << "▕";	// fullwidth
 		for (int column = range_begin.x; column <= range_end.x; column++) {
 			if (current_position == Coordinate(column, row)) {
-				switch (map_data[column][row].getColor()) {
-				case PAVEMENT:
-					setColor(160);
-					break;
-				case STARTPOINT:
-					setColor(192);
-					break;
-				case DESTPOINT:
-					setColor(144);
-					break;
-				default:
-					setColor(208);
-					break;
-				}
-				cout << player_mark;	// fullwidth
+				setColor(map_data.at(column).at(row).color);
+				cout << map_data.at(column).at(row).player_mark;
+				setColor();
 			}
 			else {
-				setColor(map_data[column][row].getColor());
-				cout << map_data[column][row].getMark();
+				setColor(map_data[column][row].color);
+				cout << map_data[column][row].mark;
+				setColor();
 			}
 		}
 		setColor();
 		cout << "▏\n";	// fullwidth
-
 	}
-	setColor();
 
 	cout << "  ";
 	for (int column = 0; column < vision_size.width; column++) {
 		cout << "▔";	// fullwidth
 	}
-	cout << "\n";
+	cout << "\n\n";
+
+	cout << "  移動位置：w,a,s,d或↑↓←→  查看隊員：p  查看背包：b  退出：Esc";
+
+	cout << "\n\n";
+
+	cout << "  " << map_data.at(current_position.x).at(current_position.y).explanation << "\n\n";
 
 	return;
 }
 
+void Field::setColor(unsigned int color) const
+{
+	HANDLE hConsole;
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, color);
+}
 
+void Field::setCursor(int x, int y) const {
+	HANDLE hin;
+	DWORD WriteWord;
+	COORD pos;
+	hin = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	pos.X = x, pos.Y = y;	// 將位置設在 (x,y) 之地方。
+	SetConsoleCursorPosition(hin, pos);
+}

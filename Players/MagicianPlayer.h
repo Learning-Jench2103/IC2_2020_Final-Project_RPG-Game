@@ -13,8 +13,18 @@ public:
 	MagicianPlayer(const MagicianPlayer& a);
 	virtual void setLevel(int value);
 
+	virtual void setExp(int);
+	virtual void addExp(int);
+	virtual void addExp(double);
+	virtual void minusExp(int);
+
 	virtual void specialSkill(void);
 	const string specialSkill_description = "可提升10點魔力，但會扣除15點血量";
+
+	virtual string showInfo();
+
+	virtual vector<string> getInfoArray() const;
+
 	virtual string serialize();
 
 	static NovicePlayer* unserialize(string record);

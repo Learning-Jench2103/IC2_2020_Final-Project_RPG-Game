@@ -17,6 +17,7 @@ public:
 	Backpack();
 	Backpack(int backpack_weight_limit);
 	bool setWeightLimit(int new_weight_limit);
+	void addWeightLimit();	// add 2
 
 	bool putItem(Item* item);
 	Item* takeItem(int index);
@@ -24,7 +25,7 @@ public:
 	int getCurrentBackpackWeight(void) const;
 	int getBackpackWeightLimit(void) const;
 	vector<string> showBackpack(void) const;
-	vector<string> showItemInfo(int index) const;
+	string showItemInfo(int index) const;
 	int getItemAmount(void) const;
 };
 

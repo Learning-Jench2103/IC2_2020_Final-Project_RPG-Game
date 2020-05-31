@@ -1,6 +1,8 @@
 #ifndef BASEMONSTER_H
 #define BASEMONSTER_H
 #include <iostream>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -20,9 +22,12 @@ public:
 	~BaseMonster();
 
 	void setHP(int h);
+	void decreaseHp(int value);
 	int getHP() const;
 	void setMP(int m);
 	int getMP() const;
+
+	vector<string> getInfo() const;
 
 	static int getInstanceCount(void);
 	virtual string serialize() = 0;

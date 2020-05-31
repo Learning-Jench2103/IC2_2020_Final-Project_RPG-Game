@@ -1,4 +1,6 @@
 #include "MagicianPlayer.h"
+#include "../Items/base/ArmorItem.h"
+#include "../Items/base/WeaponItem.h"
 #include <string>
 #include <sstream>
 
@@ -6,6 +8,8 @@ MagicianPlayer::MagicianPlayer()
 	:NovicePlayer()
 {
 	setLevel(1);	// MagicianPlayer::setLevel(int value)
+	setHp(max_hp);
+	setMp(max_mp);
 }
 
 MagicianPlayer::MagicianPlayer(int value)
@@ -32,7 +36,7 @@ MagicianPlayer::MagicianPlayer(const MagicianPlayer& a)
 	setHp(a.getHp());
 	setMp(a.getMp());
 	setExp(a.getExp());
-	setMoney(a.getMoney());
+	//setMoney(a.getMoney());
 }
 
 void MagicianPlayer::setLevel(int value)
@@ -45,9 +49,40 @@ void MagicianPlayer::setLevel(int value)
 	}
 	max_hp = 120 + 15 * level;
 	max_mp = 100 + 15 * level;
+	NovicePlayer::setHp(max_hp);
+	NovicePlayer::setMp(max_mp);
 	attack = 30 + 8 * level;
 	defense = 20 + 7 * level;
 	lvup_exp = pow(10, log2(level + 1));
+}
+
+void MagicianPlayer::setExp(int value)
+{
+	if (value <= 0) {
+		return;
+	}
+	else if (value > lvup_exp) {
+		setLevel(level + 1);
+		NovicePlayer::setExp(value);
+	}
+	else {
+		NovicePlayer::setExp(value);
+	}
+}
+
+void MagicianPlayer::addExp(int a)
+{
+	setExp(getExp() + a);
+}
+
+void MagicianPlayer::addExp(double ratio)
+{
+	setExp(getExp() + lvup_exp * (ratio));
+}
+
+void MagicianPlayer::minusExp(int value)
+{
+	setExp(getExp() - value);
 }
 
 void MagicianPlayer::specialSkill(void)
@@ -57,6 +92,49 @@ void MagicianPlayer::specialSkill(void)
 	}
 	setMp(getMp() + 10);
 	setHp(getHp() - 15);
+}
+
+string MagicianPlayer::showInfo()
+{
+	string result;
+	stringstream ss;
+	result += "職業：MagicianPlayer";
+	result += " 名字：" + getName();
+	result += " 等級："; ss << level;	result += ss.str();	ss.str("");	ss.clear();
+	result += " 經驗："; ss << getExp();	result += ss.str();	ss.str("");	ss.clear();
+	result += " 血量："; ss << getHp();	result += ss.str();	ss.str("");	ss.clear();
+	result += " 魔力："; ss << getMp();	result += ss.str();	ss.str("");	ss.clear();
+	result += " 攻擊力："; ss << attack;	result += ss.str();	ss.str("");	ss.clear();
+	result += " 防禦力："; ss << defense;	result += ss.str();	ss.str("");	ss.clear();
+	result += " 升級所需經驗值："; ss << lvup_exp;	result += ss.str();	ss.str("");	ss.clear();
+	if (getWeapon() != NULL) {
+		result += " 裝備武器：" + getWeapon()->name;
+	}
+	if (getArmor() != NULL) {
+		result += " 裝備防護：" + getArmor()->name;
+	}
+
+	return result;
+}
+
+vector<string> MagicianPlayer::getInfoArray() const
+{
+	vector<string> infoArray;
+	stringstream ss;
+	infoArray.push_back("=========== Player Information ===========");
+	infoArray.push_back("名字：" + getName());
+	infoArray.push_back("職業：MagicianPlayer");
+	ss << getLevel(); infoArray.push_back("等級：" + ss.str()); ss.str(""); ss.clear();
+	ss << getHp(); infoArray.push_back("血量：" + ss.str()); ss.str(""); ss.clear();
+	ss << getMp(); infoArray.push_back("魔力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getAttack(); infoArray.push_back("攻擊力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getDefense(); infoArray.push_back("防禦力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getExp(); infoArray.push_back("經驗值：" + ss.str()); ss.str(""); ss.clear();
+	ss << getMaxHP(); infoArray.push_back("最大血量：" + ss.str()); ss.str(""); ss.clear();
+	ss << getMaxMP(); infoArray.push_back("最大魔力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getLvupExp(); infoArray.push_back("下一等級經驗值：" + ss.str()); ss.str(""); ss.clear();
+	infoArray.push_back("==========================================");
+	return infoArray;
 }
 
 string MagicianPlayer::serialize()
@@ -85,12 +163,14 @@ string MagicianPlayer::serialize()
 	ss.str("");
 	ss.clear();
 	result += '$';
+	/*
 	// money //
 	ss << getMoney();
 	result += ss.str();
 	ss.str("");
 	ss.clear();
 	result += '$';
+	*/
 	// level //
 	ss << getLevel();
 	result += ss.str();
@@ -139,6 +219,7 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	ss >> ex;
 	ss.str("");
 	ss.clear();
+	/*
 	// money //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -146,6 +227,7 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	ss >> mon;
 	ss.str("");
 	ss.clear();
+	*/
 	// level //
 	begin = end;
 	end = record.find('#', begin + 1);
@@ -159,7 +241,7 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
-	a->setMoney(mon);
+	//a->setMoney(mon);
 
 	return a;
 }

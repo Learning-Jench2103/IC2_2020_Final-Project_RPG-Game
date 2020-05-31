@@ -138,6 +138,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Events\EndScreen.cpp" />
+    <ClCompile Include="Events\NotNotGame.cpp" />
     <ClCompile Include="Items\Armor_Armour.cpp" />
     <ClCompile Include="Items\Armor_GoldenShield.cpp" />
     <ClCompile Include="Items\Consumable_LifePotion.cpp" />
@@ -151,13 +153,18 @@
     <ClCompile Include="Others\Backpack.cpp" />
     <ClCompile Include="Others\Battle.cpp" />
     <ClCompile Include="Others\Field.cpp" />
+    <ClCompile Include="Others\Game.cpp" />
     <ClCompile Include="Others\Menu.cpp" />
+    <ClCompile Include="Others\Store.cpp" />
     <ClCompile Include="Players\MagicianPlayer.cpp" />
     <ClCompile Include="Players\NovicePlayer.cpp" />
     <ClCompile Include="Players\OrcPlayer.cpp" />
     <ClCompile Include="Players\\KnightPlayer.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Events\EndScreen.h" />
+    <ClInclude Include="Events\NotNotGame.h" />
     <ClInclude Include="Items\Armor_Armour.h" />
     <ClInclude Include="Items\Armor_GoldenShield.h" />
     <ClInclude Include="Items\base\ArmorItem.h" />
@@ -175,7 +182,10 @@
     <ClInclude Include="Others\Backpack.h" />
     <ClInclude Include="Others\Battle.h" />
     <ClInclude Include="Others\Field.h" />
+    <ClInclude Include="Others\Game.h" />
     <ClInclude Include="Others\Menu.h" />
+    <ClInclude Include="Others\Store.h" />
+    <ClInclude Include="Others\UsefulFunctions.h" />
     <ClInclude Include="Players\KnightPlayer.h" />
     <ClInclude Include="Players\MagicianPlayer.h" />
     <ClInclude Include="Players\NovicePlayer.h" />

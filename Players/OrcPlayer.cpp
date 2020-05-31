@@ -1,4 +1,6 @@
 #include "OrcPlayer.h"
+#include "../Items/base/ArmorItem.h"
+#include "../Items/base/WeaponItem.h"
 #include <string>
 #include <sstream>
 
@@ -6,6 +8,8 @@ OrcPlayer::OrcPlayer()
 	:NovicePlayer()
 {
 	setLevel(1);	// OrcPlayer::setLevel(int value)
+	setHp(max_hp);
+	setMp(max_mp);
 }
 
 OrcPlayer::OrcPlayer(int value)
@@ -32,7 +36,7 @@ OrcPlayer::OrcPlayer(const OrcPlayer& a)
 	setHp(a.getHp());
 	setMp(a.getMp());
 	setExp(a.getExp());
-	setMoney(a.getMoney());
+	//setMoney(a.getMoney());
 }
 
 void OrcPlayer::setLevel(int value)
@@ -45,9 +49,40 @@ void OrcPlayer::setLevel(int value)
 	}
 	max_hp = 200 + 20 * level;
 	max_mp = 50 + 5 * level;
+	setHp(max_hp);
+	setMp(max_mp);
 	attack = 50 + 12 * level;
 	defense = 30 + 10 * level;
 	lvup_exp = pow(10, log2(level + 1));
+}
+
+void OrcPlayer::setExp(int value)
+{
+	if (value <= 0) {
+		return;
+	}
+	else if (value > lvup_exp) {
+		setLevel(level + 1);
+		NovicePlayer::setExp(value);
+	}
+	else {
+		NovicePlayer::setExp(value);
+	}
+}
+
+void OrcPlayer::addExp(int a)
+{
+	setExp(getExp() + a);
+}
+
+void OrcPlayer::addExp(double ratio)
+{
+	setExp(getExp() + lvup_exp * (ratio));
+}
+
+void OrcPlayer::minusExp(int value)
+{
+	setExp(getExp() - value);
 }
 
 void OrcPlayer::specialSkill(void)
@@ -81,12 +116,14 @@ string OrcPlayer::serialize()
 	ss.str("");
 	ss.clear();
 	result += '$';
+	/*
 	// money //
 	ss << getMoney();
 	result += ss.str();
 	ss.str("");
 	ss.clear();
 	result += '$';
+	*/
 	// level //
 	ss << getLevel();
 	result += ss.str();
@@ -95,6 +132,49 @@ string OrcPlayer::serialize()
 	result += '#';	// end signal
 
 	return result;
+}
+
+string OrcPlayer::showInfo()
+{
+	string result;
+	stringstream ss;
+	result += "職業：OrcPlayer     ";
+	result += " 名字：" + getName();
+	result += " 等級："; ss << level;	result += ss.str();	ss.str("");	ss.clear();
+	result += " 經驗："; ss << getExp();	result += ss.str();	ss.str("");	ss.clear();
+	result += " 血量："; ss << getHp();	result += ss.str();	ss.str("");	ss.clear();
+	result += " 魔力："; ss << getMp();	result += ss.str();	ss.str("");	ss.clear();
+	result += " 攻擊力："; ss << attack;	result += ss.str();	ss.str("");	ss.clear();
+	result += " 防禦力："; ss << defense;	result += ss.str();	ss.str("");	ss.clear();
+	result += " 升級所需經驗值："; ss << lvup_exp;	result += ss.str();	ss.str("");	ss.clear();
+	if (getWeapon() != NULL) {
+		result += " 裝備武器：" + getWeapon()->name;
+	}
+	if (getArmor() != NULL) {
+		result += " 裝備防護：" + getArmor()->name;
+	}
+
+	return result;
+}
+
+vector<string> OrcPlayer::getInfoArray() const
+{
+	vector<string> infoArray;
+	stringstream ss;
+	infoArray.push_back("=========== Player Information ===========");
+	infoArray.push_back("名字：" + getName());
+	infoArray.push_back("職業：OrcPlayer");
+	ss << getLevel(); infoArray.push_back("等級：" + ss.str()); ss.str(""); ss.clear();
+	ss << getHp(); infoArray.push_back("血量：" + ss.str()); ss.str(""); ss.clear();
+	ss << getMp(); infoArray.push_back("魔力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getAttack(); infoArray.push_back("攻擊力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getDefense(); infoArray.push_back("防禦力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getExp(); infoArray.push_back("經驗值：" + ss.str()); ss.str(""); ss.clear();
+	ss << getMaxHP(); infoArray.push_back("最大血量：" + ss.str()); ss.str(""); ss.clear();
+	ss << getMaxMP(); infoArray.push_back("最大魔力：" + ss.str()); ss.str(""); ss.clear();
+	ss << getLvupExp(); infoArray.push_back("下一等級經驗值：" + ss.str()); ss.str(""); ss.clear();
+	infoArray.push_back("==========================================");
+	return infoArray;
 }
 
 NovicePlayer* OrcPlayer::unserialize(string record)
@@ -109,7 +189,7 @@ NovicePlayer* OrcPlayer::unserialize(string record)
 	}
 
 	string n;
-	int h, m, ex, mon, lev;
+	int h, m, ex, lev;
 	// name //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -135,6 +215,7 @@ NovicePlayer* OrcPlayer::unserialize(string record)
 	ss >> ex;
 	ss.str("");
 	ss.clear();
+	/*
 	// money //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -142,6 +223,7 @@ NovicePlayer* OrcPlayer::unserialize(string record)
 	ss >> mon;
 	ss.str("");
 	ss.clear();
+	*/
 	// level //
 	begin = end;
 	end = record.find('#', begin + 1);
@@ -155,7 +237,7 @@ NovicePlayer* OrcPlayer::unserialize(string record)
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
-	a->setMoney(mon);
+	//a->setMoney(mon);
 
 	return a;
 }

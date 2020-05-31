@@ -4,7 +4,7 @@
 
 Backpack::Backpack()
 {
-	backpack_weight_limit = 10;
+	backpack_weight_limit = 40;
 }
 
 Backpack::Backpack(int backpack_weight_limit)
@@ -42,6 +42,11 @@ bool Backpack::setWeightLimit(int new_weight_limit)
 	return true;
 }
 
+void Backpack::addWeightLimit()
+{
+	backpack_weight_limit += 10;
+}
+
 int Backpack::getCurrentBackpackWeight(void) const
 {
 	return backpack_weight;
@@ -61,29 +66,29 @@ vector<string> Backpack::showBackpack(void) const
 	return result;
 }
 
-vector<string> Backpack::showItemInfo(int index) const
+string Backpack::showItemInfo(int index) const
 {
-	vector<string> result;
+	string result;
 	stringstream ss;
-	result.push_back("Effect: " + backpack.at(index)->effects);
-	result.push_back("Description: " + backpack.at(index)->description);
+	result += ("Effect: " + backpack.at(index)->effects) + "\n";
+	result += ("     Description: " + backpack.at(index)->description) + "\n";
 	/* weight */
 	ss << backpack.at(index)->weight;
-	result.push_back("Weight = " + ss.str());
+	result += ("     Weight = " + ss.str()) + "\n";
 	ss.str("");	ss.clear();
 	/* level_required */
 	ss << backpack.at(index)->level_required;
-	result.push_back("Required Level = " + ss.str());
+	result += ("     Required Level = " + ss.str()) + "\n";
 	ss.str("");	ss.clear();
 	/* need_hands */
 	if (backpack.at(index)->need_hands == 1) {
-		result.push_back("You should use 1 hand to hold this item.");
+		result += "     You should use 1 hand to hold this item.\n";
 	}
 	else if (backpack.at(index)->need_hands == 2) {
-		result.push_back("You should use 2 hands to hold this item.");
+		result += "     You should use 2 hands to hold this item.\n";
 	}
 	else if (backpack.at(index)->need_hands == 0) {
-		result.push_back("You can wear it to gain its function.");
+		result += "     You can wear it to gain its function.\n";
 	}
 
 	return result;

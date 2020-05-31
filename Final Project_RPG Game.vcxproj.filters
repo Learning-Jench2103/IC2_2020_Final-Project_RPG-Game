@@ -34,6 +34,12 @@
     <Filter Include="來源檔案\Items">
       <UniqueIdentifier>{170818a3-c1dd-4bfa-b1e6-6feeed8fbdce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="來源檔案\Event">
+      <UniqueIdentifier>{471d21ef-27c9-4709-8c45-a3bfe7d101d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="標頭檔\Event">
+      <UniqueIdentifier>{f9af04fd-b7d6-4f10-a802-0f0274448430}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Players\MagicianPlayer.cpp">
@@ -84,11 +90,26 @@
     <ClCompile Include="Others\Battle.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Others\Menu.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\Game.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
     <ClCompile Include="Others\Field.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="Others\Menu.cpp">
+    <ClCompile Include="Others\Store.cpp">
       <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\NotNotGame.cpp">
+      <Filter>來源檔案\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EndScreen.cpp">
+      <Filter>來源檔案\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,11 +173,26 @@
     <ClInclude Include="Others\Battle.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Others\Menu.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\Game.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
     <ClInclude Include="Others\Field.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Others\Menu.h">
+    <ClInclude Include="Others\UsefulFunctions.h">
       <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\Store.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\NotNotGame.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EndScreen.h">
+      <Filter>標頭檔\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

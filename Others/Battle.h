@@ -2,6 +2,8 @@
 #define BATTLE_H
 #include <iostream>
 #include <vector>
+#include <string>
+#include <Windows.h>
 using namespace std;
 
 class NovicePlayer;
@@ -22,11 +24,14 @@ private:
 	int monster_number;
 	int current_actor = 0;	// index of item in action_list
 	inline void reward();
+	void setCursor(int x, int y) const;
 
 public:
 	Battle(vector<NovicePlayer*> player, vector<BaseMonster*> monster, int turn_lim);
 
 	~Battle();
+
+	void run();
 
 	bool nextActor(void);	// True if there is a next actor and False if the battle ends
 

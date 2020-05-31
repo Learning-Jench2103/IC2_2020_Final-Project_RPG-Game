@@ -17,23 +17,23 @@ class NovicePlayer {
 	friend ostream& operator<<(ostream&, const NovicePlayer&);
 private:
 	string name; // Name of the player
-	int hp;	// Current HP of the player, range: [0, max_hp]
-	int mp;	// Current MP of the player, range: [0, max_mp]
+	int hp = 0;	// Current HP of the player, range: [0, max_hp]
+	int mp = 0;	// Current MP of the player, range: [0, max_mp]
 	int exp;	// Cumulative experience of the player, >= 0
 				// Will not reset to zero after leveling-up
-	int money;	// Current amount of money that player carries, >= 0
+	//int money;	// Current amount of money that player carries, >= 0
 
 	WeaponItem* weapon = NULL; // weapon item
 	ArmorItem* armor = NULL; // armor item
 
-	Backpack backpack;
+	//Backpack backpack;
 
 protected:
 	int level;	// The level of the player, >= 1
 	int attack;	// Attack of the player
 	int defense;	// Defense of the player
-	int max_hp;	// Max HP of the player
-	int max_mp;	// Max MP of the player
+	int max_hp = 110;	// Max HP of the player
+	int max_mp = 45;	// Max MP of the player
 	int lvup_exp;	// Experience needed for leveling-up
 
 public:
@@ -46,17 +46,20 @@ public:
 	string getName() const;
 	virtual void setLevel(int);	// also calculate attack, defense, max_hp, max_mp and lvup_exp
 	int getLevel() const;
+	void addHp(int);
+	void decreaseHp(int);
 	void setHp(int);	// should not greater than max_hp
 	int getHp() const;
 	void setMp(int);	// should not greater than max_mp
 	int getMp() const;
-	void setExp(int);
-	void addExp(int);
-	void addExp(double);
+	virtual void setExp(int);
+	virtual void addExp(int);
+	virtual void addExp(double);
+	virtual void minusExp(int);
 	int getExp() const;
-	void setMoney(int);
-	void addMoney(int);
-	int getMoney() const;
+	//void setMoney(int);
+	//void addMoney(int);
+	//int getMoney() const;
 	void setAttack(int);
 	int getAttack(void) const;
 	void setDefense(int);
@@ -64,14 +67,22 @@ public:
 	int getMaxHP(void) const;
 	int getMaxMP(void) const;
 	int getLvupExp(void) const;
+	virtual string showInfo();
+
+	WeaponItem* getWeapon();
+	ArmorItem* getArmor();
 
 	virtual void specialSkill(void);
 
-	bool equipWeapon(WeaponItem* weapon);
-	bool equipArmor(ArmorItem* armor);
+	bool equipWeapon(WeaponItem* weapon, Backpack* backpack);
+	bool equipArmor(ArmorItem* armor, Backpack* backpack);
 	void useConsumable(ConsumableItem* consumable);
 
+	virtual vector<string> getInfoArray() const;
+
+
 	/* backpack */
+	/*
 	int getCurrentBackpackWeight(void) const;
 	int getBackpackWeightLimit(void) const;
 	vector<string> showBackpack(void) const;
@@ -80,6 +91,7 @@ public:
 	Item* getItemPtr(int index);
 	bool putItem(Item* item);
 	void displayBackpack();
+	*/
 
 	virtual string serialize();
 	static NovicePlayer* unserialize(string record);
