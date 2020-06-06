@@ -77,7 +77,7 @@ void Game::initializeFirstFloor()
 		delete First_floor;
 	}
 	First_floor = new Field("1F GP教室.csv", 14, 14);
-	First_floor->setGrid(111, "陷阱", "●", 253, "");
+	First_floor->setGrid(111, "陷阱", "●", 253, ""/*"飢餓已久的野獸們終於等到羊肉啦~~接招吧勇者們！"*/);
 	First_floor->setGrid(131, "紙條", "■", 250, "");
 	First_floor->setGrid(121, "蟲洞", "■", 250, "");
 	First_floor->setGrid(11, "商店", "■", 249, "");
@@ -174,6 +174,8 @@ bool Game::play()
 				}
 				cout << "  恭喜踩到寶箱！你的每位成員都獲得了10點經驗值！\n\n  ";
 				setColor();
+				system("cls");
+				current_field->display();
 				step_count = 0;
 			}
 			else if (step_count > 30 && rand() % 30 == 0) {
@@ -182,6 +184,8 @@ bool Game::play()
 				}
 				cout << "  恭喜踩到寶箱！你的每位成員都獲得了5點血量！\n\n  ";
 				setColor();
+				system("cls");
+				current_field->display();
 				step_count = 0;
 			}
 			else if (step_count > 30 && rand() % 26 == 0) {
@@ -190,6 +194,8 @@ bool Game::play()
 				}
 				cout << "  恭喜踩到寶箱！你的每位成員都獲得了5點經驗值！\n\n  ";
 				setColor();
+				system("cls");
+				current_field->display();
 				step_count = 0;
 			}
 			else if (step_count > 30 && rand() % 22 == 0) {
@@ -198,6 +204,8 @@ bool Game::play()
 				}
 				cout << "  恭喜踩到寶箱！你獲得了10塊金幣！\n\n  ";
 				setColor();
+				system("cls");
+				current_field->display();
 				step_count = 0;
 			}
 			setColor();
@@ -212,20 +220,14 @@ bool Game::play()
 			// All map
 			switch (current_symbol) {
 			case 11:
-			{
+				//Sleep(1000);
 				system("cls");
 				store->run();
 				system("cls");
 				current_field->display();
-				if (current_field == First_floor) {
-					cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-				}
-			}
-			break;
+				break;
 			case 21:
-			{
 				if (rand() % 100 == 0) {
-					system("cls");
 					cout << "  恭喜您在這個不起眼的角落\n";	Sleep(1000);
 					cout << "  遇上了千年一遇的\n";	Sleep(1000);
 					cout << "  cpsoo先生走失的那隻\n";	Sleep(1000);
@@ -238,21 +240,15 @@ bool Game::play()
 					for (int i = 0; i < player_list.size(); i++) {
 						player_list.at(i)->setExp(player_list.at(i)->getLvupExp() + 10);
 					}
-					Sleep(4000);
-					system("cls");
-					current_field->display();
-					if (current_field == First_floor) {
-						cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-					}
 				}
-			}
-			break;
+				break;
 			}
 
 			// 1F 
 			switch (current_symbol) {
 			case 101:
 				if (!goblin_monster_killed) {
+					//Sleep(1000);
 					system("cls");
 					Sleep(1000);
 					cout << "\n  Goblin：你還沒\n\n";
@@ -266,11 +262,9 @@ bool Game::play()
 					system("cls");
 					Sleep(1000);
 					current_field->display();
-					if (current_field == First_floor) {
-						cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-					}
 				}
 				else if (paper_amount < 5) {
+					//Sleep(1000);
 					system("cls");
 					Sleep(1000);
 					cout << "\n  cpsoo先生：Wait wait wait!!\n\n";
@@ -284,11 +278,9 @@ bool Game::play()
 					system("cls");
 					Sleep(1000);
 					current_field->display();
-					if (current_field == First_floor) {
-						cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-					}
 				}
 				else {
+					//Sleep(1000);
 					system("cls");
 					Sleep(500);
 					setCursor(3, 3);
@@ -296,14 +288,8 @@ bool Game::play()
 					Sleep(1000);
 					current_field = Second_floor;
 					system("cls");
-					Welcome_2F welcome;
-					welcome.run();
-					system("cls");
 					Sleep(500);
 					current_field->display();
-					if (current_field == First_floor) {
-						cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-					}
 				}
 				break;
 			case 111:
@@ -323,20 +309,11 @@ bool Game::play()
 				system("cls");
 				//介紹Battle
 				Sleep(1000);
-				do {
-					player_list_response = player_screen->run();
-					if (player_list_response != -1) {
-						choose_member.insert(player_list_response);
-					}
-				} while (player_list_response != -1 && choose_member.size() != player_list.size());
-
-				/*
 				player_list_response = player_screen->run();
-				while (player_list_response != -1 && choose_member.size() != player_list.size()) {
+				while (player_list_response != -1) {
 					choose_member.insert(player_list_response);
 					player_list_response = player_screen->run();
 				}
-				*/
 				if (choose_member.size() == 0) {
 					//delete player_screen;
 				}
@@ -379,9 +356,6 @@ bool Game::play()
 
 				system("cls");
 				current_field->display();
-				if (current_field == First_floor) {
-					cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-				}
 
 				break;
 			case 121:
@@ -442,101 +416,78 @@ bool Game::play()
 				system("cls");
 				Sleep(500);
 				current_field->display();
-				if (current_field == First_floor) {
-					cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
-				}
 				break;
 
 			case 201:
-				if (!second_floor_finish) {
-					system("cls");
-					End_2F End;
-					End.run();
-					system("cls");
-					player_screen = new Menu;
-					int player_list_response;
-					player_screen->question_name = "查看您的隊伍成員";
-					player_screen->instruction.push_back("請以↑↓鍵移動游標，並以Enter選擇參加戰鬥的隊員，選擇完畢請按下Esc；或直接按Esc鍵退出");
-					for (int i = 0; i < player_list.size(); i++) {
-						player_screen->options.push_back(player_list.at(i)->getName());
+				player_screen = new Menu;
+				int player_list_response;
+				player_screen->question_name = "查看您的隊伍成員";
+				player_screen->instruction.push_back("請以↑↓鍵移動游標，並以Enter選擇參加戰鬥的隊員，選擇完畢請按下Esc；或直接按Esc鍵退出");
+				for (int i = 0; i < player_list.size(); i++) {
+					player_screen->options.push_back(player_list.at(i)->getName());
+				}
+				for (int i = 0; i < player_list.size(); i++) {
+					player_screen->option_descriptions.push_back(player_list.at(i)->showInfo());
+				}
+				system("cls");
+				player_list_response = player_screen->run();
+				while (player_list_response != -1) {
+					choose_member.insert(player_list_response);
+					player_list_response = player_screen->run();
+				}
+				if (choose_member.size() == 0) {
+					delete player_screen;
+					break;
+				}
+				else {
+					vector<NovicePlayer*> choose_player;
+					for (set<int>::iterator it = choose_member.begin(); it != choose_member.end(); it++) {
+						choose_player.push_back(player_list.at(*it));
 					}
-					for (int i = 0; i < player_list.size(); i++) {
-						player_screen->option_descriptions.push_back(player_list.at(i)->showInfo());
+					int monster_num = (choose_player.size() * 0.7 >= 1) ? choose_player.size() * 0.7 : 1;
+					vector<BaseMonster*> monster_list;
+					for (int i = 0; i < monster_num; i++) {
+						BaseMonster* zombie = new ZombieMonster;
+						monster_list.push_back(zombie);
 					}
+					Battle* battle = new Battle(choose_player, monster_list, 0);
 					system("cls");
-					do {
-						player_list_response = player_screen->run();
-						if (player_list_response != -1) {
-							choose_member.insert(player_list_response);
-						}
-					} while (player_list_response != -1 && choose_member.size() != player_list.size());
-					if (choose_member.size() == 0) {
-						delete player_screen;
+					battle->run();
+					if (battle->playerWin()) {
+						zombie_monster_killed = true;
+						system("cls");
+						Sleep(500);
+						cout << "\n\n   電梯上樓...";
+						current_field = Third_floor;
+						Sleep(500);
+						system("cls");
+						current_field->display();
+					}
+					else if (battle->monsterWin()) {
+						cout << "   遊戲即將結束";
+						Sleep(1500);
+						game_end = true;
 						break;
 					}
 					else {
-						vector<NovicePlayer*> choose_player;
-						for (set<int>::iterator it = choose_member.begin(); it != choose_member.end(); it++) {
-							choose_player.push_back(player_list.at(*it));
-						}
-						int monster_num = (choose_player.size() * 0.7 >= 1) ? choose_player.size() * 0.7 : 1;
-						vector<BaseMonster*> monster_list;
-						for (int i = 0; i < monster_num; i++) {
-							BaseMonster* zombie = new ZombieMonster;
-							monster_list.push_back(zombie);
-						}
-						Battle* battle = new Battle(choose_player, monster_list, 0);
-						system("cls");
-						battle->run();
-						if (battle->playerWin()) {
-							zombie_monster_killed = true;
-							second_floor_finish = true;
-							system("cls");
-							Sleep(500);
-							cout << "\n\n   電梯上樓...";
-							Sleep(1000);
-							system("cls");
-							Welcome_3F welcome;
-							welcome.run();
-							current_field = Third_floor;
-							Sleep(500);
-							system("cls");
-							current_field->display();
-						}
-						else if (battle->monsterWin()) {
-							cout << "   遊戲即將結束";
-							Sleep(1500);
-							game_end = true;
-							break;
-						}
-						else {
-							current_field->setPosition(28, 27);
-							current_field->display();
-						}
-
-						for (int i = 0; i < player_list.size(); i++) {
-							if (player_list.at(i)->getHp() == 0) {
-								delete player_list.at(i);
-								player_list.erase(player_list.begin() + i);
-								i = -1;
-							}
-						}
-						for (int i = 0; i < monster_list.size(); i++) {
-							delete monster_list.at(i);
-						}
-						delete battle;
+						current_field->setPosition(28, 27);
+						current_field->display();
 					}
-					delete player_screen;
+
+					for (int i = 0; i < player_list.size(); i++) {
+						if (player_list.at(i)->getHp() == 0) {
+							delete player_list.at(i);
+							player_list.erase(player_list.begin() + i);
+							i = -1;
+						}
+					}
+					for (int i = 0; i < monster_list.size(); i++) {
+						delete monster_list.at(i);
+					}
+					delete battle;
 				}
-				else {
-					system("cls");
-					Sleep(500);
-					cout << "\n\n   電梯上樓...";
-					current_field = Third_floor;
-					Sleep(500);
-					system("cls");
-					current_field->display();
-				}
+				delete player_screen;
+
 				break;
 			case 233:
 			case 235:
@@ -680,19 +631,11 @@ bool Game::play()
 					player_screen->option_descriptions.push_back(player_list.at(i)->showInfo());
 				}
 				system("cls");
-				do {
-					player_list_response = player_screen->run();
-					if (player_list_response != -1) {
-						choose_member.insert(player_list_response);
-					}
-				} while (player_list_response != -1 && choose_member.size() != player_list.size());
-				/*
 				player_list_response = player_screen->run();
-				while (player_list_response != -1 && choose_member.size() != player_list.size()) {
+				while (player_list_response != -1) {
 					choose_member.insert(player_list_response);
 					player_list_response = player_screen->run();
 				}
-				*/
 				if (choose_member.size() == 0) {
 					delete player_screen;
 					break;
@@ -898,11 +841,47 @@ bool Game::play()
 				case 'm':
 					serialize();
 					break;
-				case 'p':
+				}
+			} while (!(press == 'w' || press == 'a' || press == 's' || press == 'd' || press == 'b' || press == 'p' || press == 27));
+		}
+
+		//	hot key in field screen begin
+		if (press == 'b') {
+			system("cls");
+			backpack.display();
+
+			/*
+			int backpack_response = 0;
+			while (backpack_response != 1) {
+				backpack_screen = new Menu;
+
+				backpack_screen->question_name = "查看您的背包";
+
+				if (backpack.showBackpack().size() != 0) {
+					backpack_screen->instruction.push_back("請以↑↓鍵移動游標，並以Esc鍵退出");
+					backpack_screen->options = backpack.showBackpack();
+
+					for (int i = 0; i < backpack_screen->options.size(); i++) {
+						backpack_screen->option_descriptions.push_back(backpack.showItemInfo(i));
+					}
+				}
+				else {
+					backpack_screen->instruction.push_back("您的背包還沒有東西，多放點物資進來吧~~");
+					backpack_screen->options.push_back("");
+					backpack_screen->option_descriptions.push_back("這裡空空依舊，等待您來充實");
+				}
+				system("cls");
+				backpack_response = backpack_screen->run();
+
+				if (backpack_response == -1) {
+					break;
+				}
+
+				if (backpack.showBackpack().size() != 0) {
 					player_screen = new Menu;
 					int player_list_response;
 					player_screen->question_name = "查看您的隊伍成員";
-					player_screen->instruction.push_back("請以↑↓鍵移動游標，並以Esc鍵退出");
+					player_screen->instruction.push_back("請以↑↓鍵移動游標並以Enter選擇欲裝備的隊員，或以Esc鍵退出");
 					for (int i = 0; i < player_list.size(); i++) {
 						player_screen->options.push_back(player_list.at(i)->getName());
 					}
@@ -911,51 +890,53 @@ bool Game::play()
 					}
 					system("cls");
 					player_list_response = player_screen->run();
-					while (player_list_response != -1) {
-						player_list_response = player_screen->run();
+					if (player_list_response == -1) {
+						continue;
+					}
+
+
+					Item* item = backpack.takeItem(backpack_response);
+
+					switch (item->type) {
+					case 'w':
+						if (!player_list.at(player_list_response)->equipWeapon(static_cast<WeaponItem*>(item), &backpack)) {
+							backpack.putItem(item);
+							cout << "  裝備失敗，請確認您的這位隊員有足夠的空手拿著，或您的等級已經可以裝備這項物品" << item->name;
+						}
+						else {
+							system("cls");
+							Sleep(1000);
+							cout << "\n	裝備成功!!";
+						}
+						break;
+					case 'a':
+						if (!player_list.at(player_list_response)->equipArmor(static_cast<ArmorItem*>(item), &backpack)) {
+							backpack.putItem(item);
+							cout << "  裝備失敗，請確認您的這位隊員有足夠的空手裝備" << item->name;
+						}
+						else {
+							system("cls");
+							Sleep(1000);
+							cout << "\n	裝備成功!!";
+						}
+						break;
+					case 'c':
+						player_list.at(player_list_response)->useConsumable(static_cast<ConsumableItem*>(item));
+						system("cls");
+						Sleep(1000);
+						cout << "\n	飲用完畢!!";
+						break;
 					}
 					delete player_screen;
-					system("cls");
-					current_field->display();
-					break;
-				case 'b':
-					system("cls");
-					backpack.display();
-					system("cls");
-					current_field->display();
-					break;
-				case 'v':
-					system("cls");
-					if (current_field == First_floor) {
-						legend_1F legend;
-						legend.display();
-					}
-					else if (current_field == Second_floor) {
-						legend_2F legend;
-						legend.display();
-					}
-					else if (current_field == Third_floor) {
-						legend_3F legend;
-						legend.display();
-					}
-					system("cls");
-					current_field->display();
-					break;
 				}
-			} while (!current_field->move(press) && press != 27);
-		}
-		/*
-		//	hot key in field screen begin
-		if (press == 'b') {
-			system("cls");
-			backpack.display();
+				delete backpack_screen;
 
-
+			}
+			*/
 			system("cls");
 			continue;
 		}
 		else if (press == 'p') {
-
 			player_screen = new Menu;
 			int player_list_response;
 			player_screen->question_name = "查看您的隊伍成員";
@@ -974,17 +955,14 @@ bool Game::play()
 			delete player_screen;
 			system("cls");
 			continue;
-
 		}
-		else */
-
-		if (press == 27) {
+		else if (press == 27) {
 			break;
 		}
 		//	hot key in field screen end
 
 		// moving
-		//current_field->move(press);
+		current_field->move(press);
 		++step_count;
 
 		// detect current_symbol after moving
@@ -1053,7 +1031,7 @@ void Game::serialize()
 
 	file << "@Game$ " << endl;
 	file << paper_amount << ' ' << all_player_level_sigma << ' ' << second_floor_entered << ' ' << third_floor_entered << ' '
-		<< second_floor_finish << ' ' << first_notnot << ' ' << second_notnot << ' '
+		<< first_floor_finish << ' ' << second_floor_finish << ' ' << first_notnot << ' ' << second_notnot << ' '
 		<< goblin_monster_killed << ' ' << zombie_monster_killed << endl;
 
 	file << "#end#";
@@ -1157,7 +1135,7 @@ void Game::unserialize()
 	}
 
 	file >> paper_amount >> all_player_level_sigma >> second_floor_entered >> third_floor_entered
-		>> second_floor_finish >> first_notnot >> second_notnot
+		>> first_floor_finish >> second_floor_finish >> first_notnot >> second_notnot
 		>> goblin_monster_killed >> zombie_monster_killed;
 
 }
@@ -1184,13 +1162,11 @@ Game::Game()
 		Main_Menu.options.push_back("載入存檔");
 		Main_Menu.options.push_back("遊戲規則");
 		Main_Menu.options.push_back("介面說明");
-		Main_Menu.options.push_back("退　　出");
 
 		Main_Menu.option_descriptions.push_back("讓我們邁步踏入未知的世界迎接挑戰吧");
 		Main_Menu.option_descriptions.push_back("從過去的紀錄再次出發");
 		Main_Menu.option_descriptions.push_back("想看看遊戲規則再上路請這邊走");
 		Main_Menu.option_descriptions.push_back("就是遊戲介面");
-		Main_Menu.option_descriptions.push_back("該繼續準備期末囉:D");
 	}
 
 	store = new Store(&backpack, &money);
@@ -1213,8 +1189,7 @@ Game::~Game()
 void Game::run()
 {
 	int main_menu_chosen;
-	bool close = false;
-	while (!close) {	// main menu begin
+	while (1) {	// main menu begin
 		system("cls");
 		main_menu_chosen = Main_Menu.run();
 
@@ -1248,6 +1223,7 @@ void Game::run()
 				second_floor_entered = false;
 				third_floor_entered = false;
 
+				first_floor_finish = false;
 				second_floor_finish = false;
 
 				first_notnot = false;
@@ -1256,13 +1232,12 @@ void Game::run()
 				goblin_monster_killed = false;
 				zombie_monster_killed = false;
 
-				Welcome_1F welcome;
-				system("cls");
-				welcome.run();
-				system("cls");
+
 			}
 
 			reset = play();
+
+			// if(!game_end){serialize()};
 
 			break;	// main_menu_chosen == 0 end
 
@@ -1272,16 +1247,7 @@ void Game::run()
 			initializeThirdFloor();
 			unserialize();
 			reset = play();
-
-			break;
-		case 4:
-			close = true;
-
-
-
-
 		}
-
 	}	// main menu end
 
 }

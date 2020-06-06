@@ -1,6 +1,11 @@
 #include "Weapon_SkywardSword.h"
 
 SkywardSword::SkywardSword()
-	:WeaponItem(2, " ぱ 糃", "ю阑糤10翴", "单2局Τ", 20, 'w', 1, 10, 0)
+	:WeaponItem(2, "ぱ糃", "ю阑糤10翴", "单2局Τ", 20, 'w', 1, 10, 0)
 {
+}
+
+string SkywardSword::getEngName()
+{
+	return "SkywardSword";
 }

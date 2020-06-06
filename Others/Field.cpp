@@ -263,6 +263,8 @@ bool Field::move(char key)
 			++current_position.x;
 		}
 		break;
+	default:
+		return false;
 	}
 	return true;
 }
@@ -434,7 +436,7 @@ void Field::display(void) const
 	}
 	cout << "\n\n";
 
-	cout << "  移動位置：w,a,s,d或↑↓←→  查看隊員：p  查看背包：b  退出：Esc";
+	cout << "  移動位置：w,a,s,d或↑↓←→  查看隊員：p  查看背包：b  查看圖例：v  進度存檔：m  退出：Esc";
 
 	cout << "\n\n";
 

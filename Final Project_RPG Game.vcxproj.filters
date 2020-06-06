@@ -111,6 +111,27 @@
     <ClCompile Include="Events\EndScreen.cpp">
       <Filter>來源檔案\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Others\legend_1F.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\legend_2F.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Others\legend_3F.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\Welcome_1F.cpp">
+      <Filter>來源檔案\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\Welcome_2F.cpp">
+      <Filter>來源檔案\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\End_2F.cpp">
+      <Filter>來源檔案\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\Welcome_3F.cpp">
+      <Filter>來源檔案\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Players\KnightPlayer.h">
@@ -192,6 +213,27 @@
       <Filter>標頭檔\Event</Filter>
     </ClInclude>
     <ClInclude Include="Events\EndScreen.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\legend_1F.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\legend_2F.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Others\legend_3F.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\Welcome_1F.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\Welcome_2F.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\End_2F.h">
+      <Filter>標頭檔\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\Welcome_3F.h">
       <Filter>標頭檔\Event</Filter>
     </ClInclude>
   </ItemGroup>

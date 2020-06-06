@@ -1,6 +1,12 @@
 #include "MagicianPlayer.h"
 #include "../Items/base/ArmorItem.h"
 #include "../Items/base/WeaponItem.h"
+#include "../Items/Armor_Armour.h"
+#include "../Items/Armor_GoldenShield.h"
+#include "../Items/Consumable_LifePotion.h"
+#include "../Items/Consumable_MagicPotion.h"
+#include "../Items/Weapon_DragonKillFalchion.h"
+#include "../Items/Weapon_SkywardSword.h"
 #include <string>
 #include <sstream>
 
@@ -176,6 +182,17 @@ string MagicianPlayer::serialize()
 	result += ss.str();
 	ss.str("");
 	ss.clear();
+	result += '$';
+
+	if (getWeapon() != nullptr) {
+		result += getWeapon()->getEngName();
+		result += '$';
+	}
+	if (getArmor() != nullptr) {
+		result += getArmor()->getEngName();
+		result += '$';
+	}
+
 	result += '#';	// end signal
 
 	return result;
@@ -230,7 +247,7 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	*/
 	// level //
 	begin = end;
-	end = record.find('#', begin + 1);
+	end = record.find('$', begin + 1);
 	ss << string(record, begin + 1, end - begin - 1);
 	ss >> lev;
 	ss.str("");
@@ -242,6 +259,42 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	a->setMp(m);
 	a->setExp(ex);
 	//a->setMoney(mon);
+
+	if (record.at(end + 1) != '#') {
+		begin = end;
+		end = record.find('$', begin + 1);
+
+		if (string(record, begin + 1, end - begin - 1) == "Armour") {
+			a->armor = new Armour;
+		}
+		else if (string(record, begin + 1, end - begin - 1) == "GoldenShield") {
+			a->armor = new GoldenShield;
+		}
+		else if (string(record, begin + 1, end - begin - 1) == "DragonKillFalchion") {
+			a->weapon = new DragonKillFalchion;
+		}
+		else if (string(record, begin + 1, end - begin - 1) == "SkywardSword") {
+			a->weapon = new SkywardSword;
+		}
+
+		if (record.at(end + 1) != '#') {
+			begin = end;
+			end = record.find('$', begin + 1);
+
+			if (string(record, begin + 1, end - begin - 1) == "Armour") {
+				a->armor = new Armour;
+			}
+			else if (string(record, begin + 1, end - begin - 1) == "GoldenShield") {
+				a->armor = new GoldenShield;
+			}
+			else if (string(record, begin + 1, end - begin - 1) == "DragonKillFalchion") {
+				a->weapon = new DragonKillFalchion;
+			}
+			else if (string(record, begin + 1, end - begin - 1) == "SkywardSword") {
+				a->weapon = new SkywardSword;
+			}
+		}
+	}
 
 	return a;
 }

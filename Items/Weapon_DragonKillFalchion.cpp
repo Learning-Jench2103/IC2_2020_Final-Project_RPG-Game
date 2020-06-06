@@ -1,6 +1,11 @@
 #include "Weapon_DragonKillFalchion.h"
 
 DragonKillFalchion::DragonKillFalchion()
-	:WeaponItem(4, "監 纒 ", "ю阑糤25翴", "单4局Τ", 30, 'w', 2, 25, 0)
+	:WeaponItem(4, "監纒", "ю阑糤25翴", "单4局Τ", 30, 'w', 2, 25, 0)
 {
+}
+
+string DragonKillFalchion::getEngName()
+{
+	return "DragonKillFalchion";
 }

@@ -16,3 +16,8 @@ void LifePotion::use(NovicePlayer* player)
 	}
 	used = true;
 }
+
+string LifePotion::getEngName()
+{
+	return "LifePotion";
+}

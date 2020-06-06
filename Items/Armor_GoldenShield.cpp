@@ -1,6 +1,11 @@
 #include "Armor_GoldenShield.h"
 
 GoldenShield::GoldenShield()
-	:ArmorItem(4, " 牧 竛", "ň縨糤10翴", "单4局Τ", 20, 'a', 0, 10, 0)
+	:ArmorItem(4, "牧竛", "ň縨糤10翴", "单4局Τ", 20, 'a', 0, 10, 0)
 {
+}
+
+string GoldenShield::getEngName()
+{
+	return string("GoldenShield");
 }

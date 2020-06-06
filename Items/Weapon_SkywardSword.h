@@ -18,7 +18,7 @@ public:
 	attack_increment = 10;
 	exp_increment = 0;
 	*/
-
+	virtual string getEngName();
 };
 
 #endif

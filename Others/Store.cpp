@@ -1,16 +1,19 @@
 #include "Store.h"
 #include <Windows.h>
-
+#include <sstream>
+using namespace std;
 
 void Store::initializeStoreMenu()
 {
 	menu = new Menu;
 
 	menu->question_name = "商店街";
+	menu->instruction.push_back("");
+	menu->instruction.push_back("");
 	menu->instruction.push_back("請以↑↓鍵移動游標至欲購買的品項，按下Enter購買");
 	menu->instruction.push_back("購買前請注意每個用品的等級限制，只有隊伍中達到該等級的成員才能使用哦");
-	menu->instruction.push_back("本商店價格公道不坑殺消費者，請安心選購!!");
-	menu->instruction.push_back("提醒您，本商店不提供退貨服務，商品一經售出無法取消~~");
+	menu->instruction.push_back("本店價格公道不坑殺消費者，請安心選購!!");
+	menu->instruction.push_back("提醒您，我們不提供退貨服務，商品一經售出無法取消~~");
 
 	menu->options.push_back("倚 天 劍--售價20元");
 	menu->options.push_back("屠 龍 刀--售價35元");
@@ -66,7 +69,21 @@ void Store::run()
 
 	while (1) {
 		system("cls");
-		cout << "                                您的錢包餘額：" << *money << "元" << "   背包容量：" << backpack->getCurrentBackpackWeight() << "/" << backpack->getBackpackWeightLimit();
+		//cout << "                                您的錢包餘額：" << *money << "元" << "   背包容量：" << backpack->getCurrentBackpackWeight() << "/" << backpack->getBackpackWeightLimit();
+		stringstream ss;
+		string backpack_info;
+		backpack_info += "您的錢包餘額：";
+		ss << *money;
+		backpack_info += ss.str(); ss.str(""); ss.clear();
+		backpack_info += "元   背包容量：";
+		ss << backpack->getCurrentBackpackWeight();
+		backpack_info += ss.str(); ss.str(""); ss.clear();
+		backpack_info += '/';
+		ss << backpack->getBackpackWeightLimit();
+		backpack_info += ss.str(); ss.str(""); ss.clear();
+
+		menu->instruction.at(0) = backpack_info;
+
 		store_menu_selected = menu->run();
 
 		switch (store_menu_selected) {
@@ -169,7 +186,8 @@ void Store::run()
 		case 6:
 			initializeBackpackMenu();
 			system("cls");
-			while (backpack_screen->run() != -1) {}
+			//while (backpack_screen->run() != -1) {}
+			backpack->display();
 			delete backpack_screen;
 			break;
 		case -1:

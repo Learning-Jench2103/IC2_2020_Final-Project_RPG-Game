@@ -19,6 +19,8 @@ public:
 	exp_increment = 0;
 	*/
 
+	virtual string getEngName();
+
 };
 
 #endif

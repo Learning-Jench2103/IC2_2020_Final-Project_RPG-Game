@@ -21,3 +21,8 @@ void MagicPotion::use(NovicePlayer* player)
 
 	used = true;
 }
+
+string MagicPotion::getEngName()
+{
+	return "MagicPotion";
+}

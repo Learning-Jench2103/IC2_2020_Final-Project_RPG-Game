@@ -23,9 +23,6 @@ private:
 				// Will not reset to zero after leveling-up
 	//int money;	// Current amount of money that player carries, >= 0
 
-	WeaponItem* weapon = NULL; // weapon item
-	ArmorItem* armor = NULL; // armor item
-
 	//Backpack backpack;
 
 protected:
@@ -35,6 +32,9 @@ protected:
 	int max_hp = 110;	// Max HP of the player
 	int max_mp = 45;	// Max MP of the player
 	int lvup_exp;	// Experience needed for leveling-up
+
+	WeaponItem* weapon = nullptr; // weapon item
+	ArmorItem* armor = nullptr; // armor item
 
 public:
 	NovicePlayer();	//With level = 1, name = ¡§anonymous¡¨

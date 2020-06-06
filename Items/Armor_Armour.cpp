@@ -1,6 +1,11 @@
 #include "Armor_Armour.h"
 
 Armour::Armour()
-	:ArmorItem(2, "帛ヒ", "ň縨糤5翴", "单2局Τ", 15, 'a', 0, 5, 0)
+	:ArmorItem(2, "帛ヒ", "ň縨糤5翴", "单2局Τ", 15, 'a', 0, 5, 0)
 {
+}
+
+string Armour::getEngName()
+{
+	return "Armour";
 }

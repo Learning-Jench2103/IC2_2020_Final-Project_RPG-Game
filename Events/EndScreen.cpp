@@ -40,7 +40,7 @@ EndScreen::EndScreen()
 	cout << "恭喜你完成一項不可能的任務：";
 	Sleep(2000);
 	setCursor(4, 28);
-	cout << "通過JWMonster艱困的考驗";
+	cout << "通過JWMonster那艱困的可怕的考驗";
 	Sleep(2000);
 	setCursor(4, 30);
 	cout << "也順利度過一路上四伏的危機";

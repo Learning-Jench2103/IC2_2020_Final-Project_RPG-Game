@@ -9,6 +9,7 @@ class MagicPotion : public ConsumableItem
 public:
 	MagicPotion();
 	virtual void use(NovicePlayer*);
+	virtual string getEngName();
 };
 
 #endif

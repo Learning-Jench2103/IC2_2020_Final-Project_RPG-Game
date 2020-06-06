@@ -1,6 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Item {
@@ -17,6 +18,8 @@ public:
 		:level_required(level_required), name(name), effects(effects), description(description), weight(weight), type(type), need_hands(need_hands)
 	{
 	}
+
+	virtual string getEngName() = 0;
 
 };
 

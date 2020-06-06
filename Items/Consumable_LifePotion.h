@@ -20,7 +20,7 @@ public:
 	type = 'c';
 	need_hands = -1;
 	*/
-
+	virtual string getEngName();
 };
 
 #endif
