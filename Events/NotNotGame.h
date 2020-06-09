@@ -9,8 +9,6 @@
 
 using namespace std;
 
-
-
 class NovicePlayer;
 
 struct ques_ans {
@@ -23,7 +21,6 @@ class NotNotGame
 private:
 	vector<bool> said;
 	int question_num;
-	//const int level_limit = 5;
 	const int exp = 15;
 	double time_limit = 2.00;
 	int revival_times = 1;

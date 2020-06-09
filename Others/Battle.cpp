@@ -187,14 +187,6 @@ void Battle::run()
 		++lowest_line;
 	}
 	else {
-		/*
-		setCursor(1, 1 + (lowest_line++));
-		cout << "經過激烈的戰鬥";
-		setCursor(1, 1 + (lowest_line++));
-		cout << "你們雙方始終難分高下";
-		setCursor(1, 1 + (lowest_line++));
-		cout << "但仍看得出你旗下隊伍的高昂鬥志和必勝的決心";
-		*/
 		setCursor(1, 1 + (lowest_line++));
 		cout << "暫時的休息是為了下次的勝利";
 		setCursor(1, 1 + (lowest_line++));
@@ -253,21 +245,7 @@ bool Battle::attack(Character& actor_1, Character& actor_2, bool specialSkill = 
 			p_ptr->specialSkill();
 		}
 		p_ptr->decreaseHp((double)m_ptr->attack / p_ptr->getDefense() * 8);
-		/*
-		// need adjustment //
-		att = m_ptr->attack * 0.2;
-		if (att > p_ptr->getDefense() * 0.3) {
-			att -= p_ptr->getDefense() * 0.3;
-		}
-		else if (att > p_ptr->getDefense() * 0.15) {
-			att -= p_ptr->getDefense() * 0.15;
-		}
-		else {
-			att /= 2;
-		}
-		p_ptr->setHp(p_ptr->getHp() - att);
-		// need adjustment //
-		*/
+
 		if (p_ptr->getHp() == 0) {
 			actor_2.alive = false;
 		}
@@ -280,20 +258,7 @@ bool Battle::attack(Character& actor_1, Character& actor_2, bool specialSkill = 
 			p_ptr->specialSkill();
 		}
 		m_ptr->decreaseHp((double)p_ptr->getAttack() / m_ptr->defense * 16);
-		/*
-		// need adjustment //
-		att = p_ptr->getAttack();
-		if (att > m_ptr->defense * 0.2) {
-			att -= m_ptr->defense * 0.2;
-		}
-		else if (att > m_ptr->defense * 0.1) {
-			att -= m_ptr->defense * 0.1;
-		}
-		else {
-			att /= 2;
-		}
-		m_ptr->setHP(m_ptr->getHP() - att);
-		*/
+		
 		if (m_ptr->getHP() == 0) {
 			actor_2.alive = false;
 		}

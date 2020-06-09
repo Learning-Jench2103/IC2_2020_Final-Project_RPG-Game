@@ -110,12 +110,6 @@ string Backpack::showItemInfo(int index) const
 	ss << backpack.at(index)->weight;
 	result += ("     重量 : " + ss.str()) + "\n";
 	ss.str("");	ss.clear();
-	/* level_required */
-	/*
-	ss << backpack.at(index)->level_required;
-	result += ("     等級限制 = " + ss.str()) + "\n";
-	ss.str("");	ss.clear();
-	*/
 	/* need_hands */
 	if (backpack.at(index)->need_hands == 1) {
 		result += "     需以1支手使用\n";

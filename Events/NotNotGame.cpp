@@ -202,9 +202,7 @@ bool NotNotGame::run(vector<NovicePlayer*> player_list)
 		system("cls");
 		cout << "\n     恭喜你通過這項考驗!!\n\n     您隊伍中所有勇者將可獲得 15 點經驗值的獎勵~~\n\n     ";
 		for (int i = 0; i < player_list.size(); i++) {
-			//if (player_list.at(i)->getLevel() >= level_limit) {
 			player_list.at(i)->addExp(15);
-			//}
 		}
 		system("pause");
 	}

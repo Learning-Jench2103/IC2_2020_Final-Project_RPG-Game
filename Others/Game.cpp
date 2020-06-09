@@ -61,7 +61,7 @@ void Game::generatePlayers()
 			at_least_one = true;
 		}
 		else if (!at_least_one) {
-			cout << "您的隊伍至少需要一個職業哦哦哦";
+			cout << "     您的隊伍至少需要一個職業哦哦哦";
 			Sleep(1000);
 			system("cls");
 			Sleep(500);
@@ -308,7 +308,6 @@ bool Game::play()
 				break;
 			case 111:
 				// Create a battle
-
 				player_screen = new Menu;
 				int player_list_response;
 				player_screen->question_name = "查看您的隊伍成員";
@@ -321,7 +320,6 @@ bool Game::play()
 				}
 				//Sleep(3000);
 				system("cls");
-				//介紹Battle
 				Sleep(1000);
 				do {
 					player_list_response = player_screen->run();
@@ -330,17 +328,7 @@ bool Game::play()
 					}
 				} while (player_list_response != -1 && choose_member.size() != player_list.size());
 
-				/*
-				player_list_response = player_screen->run();
-				while (player_list_response != -1 && choose_member.size() != player_list.size()) {
-					choose_member.insert(player_list_response);
-					player_list_response = player_screen->run();
-				}
-				*/
-				if (choose_member.size() == 0) {
-					//delete player_screen;
-				}
-				else {
+				if (choose_member.size() != 0) {
 					vector<NovicePlayer*> choose_player;
 					for (set<int>::iterator it = choose_member.begin(); it != choose_member.end(); it++) {
 						choose_player.push_back(player_list.at(*it));
@@ -385,7 +373,6 @@ bool Game::play()
 
 				break;
 			case 121:
-				//Sleep(1000);
 				system("cls");
 				Sleep(1000);
 				setCursor(4, 2);
@@ -470,11 +457,7 @@ bool Game::play()
 							choose_member.insert(player_list_response);
 						}
 					} while (player_list_response != -1 && choose_member.size() != player_list.size());
-					if (choose_member.size() == 0) {
-						delete player_screen;
-						break;
-					}
-					else {
+					if (choose_member.size() != 0) {
 						vector<NovicePlayer*> choose_player;
 						for (set<int>::iterator it = choose_member.begin(); it != choose_member.end(); it++) {
 							choose_player.push_back(player_list.at(*it));
@@ -624,7 +607,6 @@ bool Game::play()
 				}
 				break;
 			case 271:
-				//Sleep(500);
 				system("cls");
 				Sleep(1000);
 				setCursor(4, 2);
@@ -686,18 +668,8 @@ bool Game::play()
 						choose_member.insert(player_list_response);
 					}
 				} while (player_list_response != -1 && choose_member.size() != player_list.size());
-				/*
-				player_list_response = player_screen->run();
-				while (player_list_response != -1 && choose_member.size() != player_list.size()) {
-					choose_member.insert(player_list_response);
-					player_list_response = player_screen->run();
-				}
-				*/
-				if (choose_member.size() == 0) {
-					delete player_screen;
-					break;
-				}
-				else {
+
+				if (choose_member.size() != 0) {
 					vector<NovicePlayer*> choose_player;
 					for (set<int>::iterator it = choose_member.begin(); it != choose_member.end(); it++) {
 						choose_player.push_back(player_list.at(*it));
@@ -944,39 +916,6 @@ bool Game::play()
 				}
 			} while (!current_field->move(press) && press != 27);
 		}
-		/*
-		//	hot key in field screen begin
-		if (press == 'b') {
-			system("cls");
-			backpack.display();
-
-
-			system("cls");
-			continue;
-		}
-		else if (press == 'p') {
-
-			player_screen = new Menu;
-			int player_list_response;
-			player_screen->question_name = "查看您的隊伍成員";
-			player_screen->instruction.push_back("請以↑↓鍵移動游標，並以Esc鍵退出");
-			for (int i = 0; i < player_list.size(); i++) {
-				player_screen->options.push_back(player_list.at(i)->getName());
-			}
-			for (int i = 0; i < player_list.size(); i++) {
-				player_screen->option_descriptions.push_back(player_list.at(i)->showInfo());
-			}
-			system("cls");
-			player_list_response = player_screen->run();
-			while (player_list_response != -1) {
-				player_list_response = player_screen->run();
-			}
-			delete player_screen;
-			system("cls");
-			continue;
-
-		}
-		else */
 
 		if (press == 27) {
 			break;
@@ -984,7 +923,6 @@ bool Game::play()
 		//	hot key in field screen end
 
 		// moving
-		//current_field->move(press);
 		++step_count;
 
 		// detect current_symbol after moving
@@ -1182,14 +1120,10 @@ Game::Game()
 
 		Main_Menu.options.push_back("進入遊戲");
 		Main_Menu.options.push_back("載入存檔");
-		Main_Menu.options.push_back("遊戲規則");
-		Main_Menu.options.push_back("介面說明");
 		Main_Menu.options.push_back("退　　出");
 
 		Main_Menu.option_descriptions.push_back("讓我們邁步踏入未知的世界迎接挑戰吧");
 		Main_Menu.option_descriptions.push_back("從過去的紀錄再次出發");
-		Main_Menu.option_descriptions.push_back("想看看遊戲規則再上路請這邊走");
-		Main_Menu.option_descriptions.push_back("就是遊戲介面");
 		Main_Menu.option_descriptions.push_back("該繼續準備期末囉:D");
 	}
 
@@ -1274,12 +1208,8 @@ void Game::run()
 			reset = play();
 
 			break;
-		case 4:
+		case 2:
 			close = true;
-
-
-
-
 		}
 
 	}	// main menu end

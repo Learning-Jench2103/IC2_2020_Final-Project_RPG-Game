@@ -69,7 +69,6 @@ void Store::run()
 
 	while (1) {
 		system("cls");
-		//cout << "                                您的錢包餘額：" << *money << "元" << "   背包容量：" << backpack->getCurrentBackpackWeight() << "/" << backpack->getBackpackWeightLimit();
 		stringstream ss;
 		string backpack_info;
 		backpack_info += "您的錢包餘額：";
@@ -186,7 +185,6 @@ void Store::run()
 		case 6:
 			initializeBackpackMenu();
 			system("cls");
-			//while (backpack_screen->run() != -1) {}
 			backpack->display();
 			delete backpack_screen;
 			break;

@@ -25,7 +25,6 @@ private:
 
 	Item* item;
 
-
 public:
 	Store(Backpack* backpack_ptr, unsigned int* money);
 	void run();

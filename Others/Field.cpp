@@ -156,27 +156,7 @@ Field::Field(const string fileName, int v_width, int v_height, int curr_x, int c
 			}
 			ss >> temp;
 			ss.str(""); ss.clear();
-			/*
-			switch (temp) {
-			case 0:
-				map_data[x][y].setGrid(0, "Pavement", "¡½", 250);
-				break;
-			case 1:
-				map_data[x][y].setGrid(1, "Wall", "¡½", 240);
-				break;
-			case 200:
-				map_data[x][y].setGrid(200, "Start", "¡½", 252);
-				start = Coordinate(x, y);
-				break;
-			case 201:
-				map_data[x][y].setGrid(201, "Destination", "¡½", 249);
-				dest = Coordinate(x, y);
-				break;
-			default:
-				map_data[x][y].setSymbol(temp);
-			}
-			map_data[x][y].setSymbol(temp);
-			*/
+
 			if (temp == 0) {
 				map_data[x][y].setGrid(0, "Pavement", "¡½", 250);
 
@@ -406,7 +386,6 @@ void Field::display(void) const
 	setCursor(4, 1);
 	cout << map_name;
 	setCursor(2, 3);
-	//cout << "  ";
 	for (int column = 0; column < vision_size.width; column++) {
 		cout << "¢b";	// fullwidth
 	}
