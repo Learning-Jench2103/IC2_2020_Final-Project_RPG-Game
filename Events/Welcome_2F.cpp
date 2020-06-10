@@ -52,9 +52,9 @@ void Welcome_2F::run()
 	cout << "不過這也是有點代價的啦啦";
 	Sleep(2500);
 	setCursor(2, 21);
-	cout << "像要是在這些路口還是走錯了";
+	cout << "要是在這些路口還是走錯了";
 	Sleep(2000);
-	cout << " 就得接受一點點懲罰呦";
+	cout << " 就得接受一點點懲罰囉";
 	
 	Sleep(4000);
 	system("cls");
@@ -74,19 +74,10 @@ void Welcome_2F::run()
 	setCursor(2, 9);
 	cout << "在持續高速運轉狀態下";
 	Sleep(2500);
-	setCursor(2, 9);
+	setCursor(2, 11);
 	cout << "別過熱當機了:)";
 	Sleep(2500);
-	setCursor(2, 12);
+	setCursor(2, 14);
 	cout << "準備好";
 	system("pause");
 }
-
-/*
-他交給挑戰者的任務
-往往既精彩又刺激
-唯一要注意的是
-請確保你的腦筋能全速運轉^^
-準備好就
-
-*/

@@ -42,7 +42,6 @@ KnightPlayer::KnightPlayer(const KnightPlayer& a)
 	setHp(a.getHp());
 	setMp(a.getMp());
 	setExp(a.getExp());
-	//setMoney(a.getMoney());
 }
 
 void KnightPlayer::setLevel(int value)
@@ -211,7 +210,7 @@ NovicePlayer* KnightPlayer::unserialize(string record)
 	}
 
 	string n;
-	int h, m, ex, mon, lev;
+	int h, m, ex, lev;
 	// name //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -237,15 +236,6 @@ NovicePlayer* KnightPlayer::unserialize(string record)
 	ss >> ex;
 	ss.str("");
 	ss.clear();
-	/*
-	// money //
-	begin = end;
-	end = record.find('$', begin + 1);
-	ss << string(record, begin + 1, end - begin - 1);
-	ss >> mon;
-	ss.str("");
-	ss.clear();
-	*/
 	// level //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -259,7 +249,6 @@ NovicePlayer* KnightPlayer::unserialize(string record)
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
-	//a->setMoney(mon);
 
 	if (record.at(end + 1) != '#') {
 		begin = end;

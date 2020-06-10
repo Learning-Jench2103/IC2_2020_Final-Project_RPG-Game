@@ -296,10 +296,13 @@ bool Game::play()
 					Sleep(1000);
 					current_field = Second_floor;
 					system("cls");
-					Welcome_2F welcome;
-					welcome.run();
-					system("cls");
-					Sleep(500);
+					if (!second_floor_entered) {
+						Welcome_2F welcome;
+						welcome.run();
+						system("cls");
+						Sleep(500);
+						second_floor_entered = true;
+					}
 					current_field->display();
 					if (current_field == First_floor) {
 						cout << "  已撿回 " << paper_amount << " 張紙條\n\n";
@@ -477,12 +480,15 @@ bool Game::play()
 							system("cls");
 							Sleep(500);
 							cout << "\n\n   電梯上樓...";
-							Sleep(1000);
-							system("cls");
-							Welcome_3F welcome;
-							welcome.run();
 							current_field = Third_floor;
-							Sleep(500);
+							Sleep(1000);
+							if (!third_floor_entered) {
+								system("cls");
+								Welcome_3F welcome;
+								welcome.run();
+								Sleep(500);
+								third_floor_entered = true;
+							}
 							system("cls");
 							current_field->display();
 						}
@@ -927,11 +933,6 @@ bool Game::play()
 
 		// detect current_symbol after moving
 		current_symbol = current_field->getSymbol();
-
-		// All map
-		switch (current_symbol) {
-
-		}
 
 		int temp_level_sigma = 0;
 		for (int i = 0; i < player_list.size(); i++) {

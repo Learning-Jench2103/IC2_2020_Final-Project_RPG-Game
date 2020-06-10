@@ -315,21 +315,6 @@ vector<string> NovicePlayer::getInfoArray() const
 {
 	vector<string> infoArray;
 	stringstream ss;
-	/*
-	output << "=========== Player Information ===========" << endl;
-	// output << "Player name = " << a.name << endl;
-	// output << "Level = " << a.level << endl;
-	// output << "Attack = " << a.attack << endl;
-	// output << "Defense = " << a.defense << endl;
-	// output << "max_hp = " << a.max_hp << endl;
-	// output << "max_mp = " << a.max_mp << endl;
-	output << "lvup_exp = " << a.lvup_exp << endl;
-	// output << "hp = " << a.hp << endl;
-	// output << "mp = " << a.mp << endl;
-	// output << "exp = " << a.exp << endl;
-	// output << "money = " << a.money << endl;
-	output << "==========================================" << endl;
-	*/
 	infoArray.push_back("=========== Player Information ===========");
 	infoArray.push_back("¦W¦r¡G" + getName());
 	infoArray.push_back("Â¾·~¡GNovicePlayer");
@@ -345,44 +330,6 @@ vector<string> NovicePlayer::getInfoArray() const
 	infoArray.push_back("==========================================");
 	return infoArray;
 }
-
-/*
-int NovicePlayer::getCurrentBackpackWeight(void) const
-{
-	return backpack.getCurrentBackpackWeight();
-}
-
-int NovicePlayer::getBackpackWeightLimit(void) const
-{
-	return backpack.getBackpackWeightLimit();
-}
-
-
-vector<string> NovicePlayer::showBackpack(void) const
-{
-	return backpack.showBackpack();
-}
-
-vector<string> NovicePlayer::showItemInfo(int index) const
-{
-	return backpack.showItemInfo(index);
-}
-
-int NovicePlayer::getItemAmount(void) const
-{
-	return backpack.getItemAmount();
-}
-
-Item* NovicePlayer::getItemPtr(int index)
-{
-	return backpack.takeItem(index);
-}
-
-bool NovicePlayer::putItem(Item* item)
-{
-	return backpack.putItem(item);
-}
-*/
 
 string NovicePlayer::serialize()
 {
@@ -446,15 +393,6 @@ NovicePlayer* NovicePlayer::unserialize(string record)
 	ss >> ex;
 	ss.str("");
 	ss.clear();
-	/*
-	// money //
-	begin = end;
-	end = record.find('$', begin + 1);
-	ss << string(record, begin + 1, end - begin - 1);
-	ss >> mon;
-	ss.str("");
-	ss.clear();
-	*/
 	// level //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -468,7 +406,6 @@ NovicePlayer* NovicePlayer::unserialize(string record)
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
-	//a->setMoney(mon);
 
 	if (record.at(end + 1) != '#') {
 		begin = end;
@@ -522,7 +459,6 @@ ostream& operator<<(ostream& output, const NovicePlayer& a)
 	output << "hp = " << a.hp << endl;
 	output << "mp = " << a.mp << endl;
 	output << "exp = " << a.exp << endl;
-	//output << "money = " << a.money << endl;
 	output << "==========================================" << endl;
 	return output;
 }

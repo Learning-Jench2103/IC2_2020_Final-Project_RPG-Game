@@ -53,8 +53,8 @@ void OrcPlayer::setLevel(int value)
 	else {
 		level = value;
 	}
-	max_hp = 200 + 20 * level;
-	max_mp = 50 + 5 * level;
+	max_hp = 170 + 20 * level;
+	max_mp = 40 + 5 * level;
 	setHp(max_hp);
 	setMp(max_mp);
 	attack = 50 + 12 * level;
@@ -122,14 +122,6 @@ string OrcPlayer::serialize()
 	ss.str("");
 	ss.clear();
 	result += '$';
-	/*
-	// money //
-	ss << getMoney();
-	result += ss.str();
-	ss.str("");
-	ss.clear();
-	result += '$';
-	*/
 	// level //
 	ss << getLevel();
 	result += ss.str();
@@ -231,15 +223,6 @@ NovicePlayer* OrcPlayer::unserialize(string record)
 	ss >> ex;
 	ss.str("");
 	ss.clear();
-	/*
-	// money //
-	begin = end;
-	end = record.find('$', begin + 1);
-	ss << string(record, begin + 1, end - begin - 1);
-	ss >> mon;
-	ss.str("");
-	ss.clear();
-	*/
 	// level //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -253,7 +236,6 @@ NovicePlayer* OrcPlayer::unserialize(string record)
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
-	//a->setMoney(mon);
 
 	if (record.at(end + 1) != '#') {
 		begin = end;

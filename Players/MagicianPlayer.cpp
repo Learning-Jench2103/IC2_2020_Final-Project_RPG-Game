@@ -57,7 +57,7 @@ void MagicianPlayer::setLevel(int value)
 	max_mp = 100 + 15 * level;
 	NovicePlayer::setHp(max_hp);
 	NovicePlayer::setMp(max_mp);
-	attack = 30 + 8 * level;
+	attack = 40 + 8 * level;
 	defense = 20 + 7 * level;
 	lvup_exp = pow(10, log2(level + 1));
 }
@@ -169,14 +169,6 @@ string MagicianPlayer::serialize()
 	ss.str("");
 	ss.clear();
 	result += '$';
-	/*
-	// money //
-	ss << getMoney();
-	result += ss.str();
-	ss.str("");
-	ss.clear();
-	result += '$';
-	*/
 	// level //
 	ss << getLevel();
 	result += ss.str();
@@ -210,7 +202,7 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	}
 
 	string n;
-	int h, m, ex, mon, lev;
+	int h, m, ex, lev;
 	// name //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -236,15 +228,6 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	ss >> ex;
 	ss.str("");
 	ss.clear();
-	/*
-	// money //
-	begin = end;
-	end = record.find('$', begin + 1);
-	ss << string(record, begin + 1, end - begin - 1);
-	ss >> mon;
-	ss.str("");
-	ss.clear();
-	*/
 	// level //
 	begin = end;
 	end = record.find('$', begin + 1);
@@ -258,7 +241,6 @@ NovicePlayer* MagicianPlayer::unserialize(string record)
 	a->setHp(h);
 	a->setMp(m);
 	a->setExp(ex);
-	//a->setMoney(mon);
 
 	if (record.at(end + 1) != '#') {
 		begin = end;

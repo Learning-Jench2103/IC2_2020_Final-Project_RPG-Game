@@ -55,7 +55,7 @@ void Battle::run()
 {
 	system("cls");
 
-	int response;
+	int response = 0;
 
 	do {
 		if (action_list.at(current_actor)->type == 'p') {
@@ -236,7 +236,6 @@ bool Battle::attack(Character& actor_1, Character& actor_2, bool specialSkill = 
 {
 	NovicePlayer* p_ptr;
 	BaseMonster* m_ptr;
-	int att;
 
 	if (actor_1.type == 'm' && actor_2.type == 'p') {
 		m_ptr = static_cast<BaseMonster*>(actor_1.instance);
@@ -258,7 +257,7 @@ bool Battle::attack(Character& actor_1, Character& actor_2, bool specialSkill = 
 			p_ptr->specialSkill();
 		}
 		m_ptr->decreaseHp((double)p_ptr->getAttack() / m_ptr->defense * 16);
-		
+
 		if (m_ptr->getHP() == 0) {
 			actor_2.alive = false;
 		}

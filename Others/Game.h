@@ -59,7 +59,6 @@ private:
 	bool second_floor_entered;	// need serialize
 	bool third_floor_entered;	// need serialize
 
-	//bool first_floor_finish;	// need serialize
 	bool second_floor_finish;	// need serialize
 
 	bool first_notnot;	// need serialize
