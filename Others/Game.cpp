@@ -559,10 +559,10 @@ bool Game::play()
 					setCursor(2, 11);
 					cout << "以下是一些和方向相關的問題，請在時限內按下符合題意的按鍵，";
 					Sleep(1500);
-					setCursor(2, 12);
+					setCursor(2, 13);
 					cout << "您有一次答錯的機會，";
 					Sleep(1500);
-					setCursor(2, 13);
+					setCursor(2, 15);
 					cout << "別緊張放輕鬆，挑戰即將開始！";
 					Sleep(2500);
 
