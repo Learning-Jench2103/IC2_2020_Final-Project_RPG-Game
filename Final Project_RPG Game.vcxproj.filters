@@ -203,9 +203,6 @@
     <ClInclude Include="Others\Field.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Others\UsefulFunctions.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
     <ClInclude Include="Others\Store.h">
       <Filter>標頭檔</Filter>
     </ClInclude>

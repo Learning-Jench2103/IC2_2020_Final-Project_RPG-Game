@@ -199,7 +199,6 @@
     <ClInclude Include="Others\legend_3F.h" />
     <ClInclude Include="Others\Menu.h" />
     <ClInclude Include="Others\Store.h" />
-    <ClInclude Include="Others\UsefulFunctions.h" />
     <ClInclude Include="Players\KnightPlayer.h" />
     <ClInclude Include="Players\MagicianPlayer.h" />
     <ClInclude Include="Players\NovicePlayer.h" />
